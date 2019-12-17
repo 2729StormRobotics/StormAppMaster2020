@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.util.TableInfo;
 
 /**
  * This class is a blueprint for a Whoosh object, which will be the future name of what was once
@@ -23,7 +24,7 @@ public class Whoosh {
     private boolean alliance;
     @ColumnInfo(name = "score")
     private int score;
-    @ColumnInfo(name="score_two")
+    @ColumnInfo(name = "score_two")
     private int scoreTwo;
 
     public Whoosh(int t, int m) {
@@ -31,7 +32,8 @@ public class Whoosh {
         match = m;
     }
 
-    public Whoosh(){}
+    public Whoosh() {
+    }
 
     public int getTeam() {
         return team;
@@ -76,7 +78,7 @@ public class Whoosh {
     @NonNull
     @Override
     public String toString() {
-        return          team
+        return team
                 + "," + match
                 + "," + (alliance ? "r" : "b")
                 + "," + score
@@ -84,3 +86,5 @@ public class Whoosh {
                 + "|";
     }
 }
+
+
