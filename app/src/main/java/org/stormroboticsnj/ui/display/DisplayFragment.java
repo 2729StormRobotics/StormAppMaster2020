@@ -5,11 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.room.RoomMasterTable;
-import androidx.room.RoomOpenHelper;
-import androidx.room.RoomSQLiteQuery;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +42,7 @@ public class DisplayFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DisplayFragment.
+     * @return A new instance of fragment ListFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static DisplayFragment newInstance(String param1, String param2) {

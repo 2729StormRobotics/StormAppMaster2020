@@ -18,13 +18,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Room;
 
 import android.view.Menu;
+
+import org.stormroboticsnj.dao.StormDao;
+import org.stormroboticsnj.models.Whoosh;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private AppDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        /* get database, or build if it doesn't exist. This exact line must be included in the onCreate
+        method of every Activity that uses the database. db can be a class-wide variable or local
+        within onCreate. */
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "stormdb").allowMainThreadQueries().build(); //build database
     }
 
     @Override
@@ -57,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public List<Whoosh> getData(String col, int val) {
+        StormDao stormDao = db.stormDao();
+        return stormDao.filterWhooshes(col, val);
     }
 }

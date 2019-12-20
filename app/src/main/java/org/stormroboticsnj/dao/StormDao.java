@@ -1,5 +1,7 @@
 package org.stormroboticsnj.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -28,4 +30,13 @@ public interface StormDao {
 
     @Query("SELECT * FROM whooshes")
     public List<Whoosh> getAllWhooshes();
+
+    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal")
+    public List<Whoosh> filterWhooshes(String colName, int searchVal);
+
+    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal ORDER BY :sortColName")
+    public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName);
+
+    @Query("SELECT * FROM whooshes")
+    public Cursor getCursor();
 }
