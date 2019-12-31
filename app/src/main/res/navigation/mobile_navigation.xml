@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="org.stormroboticsnj.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_display"
+        android:name="org.stormroboticsnj.ui.display.DisplayFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_display"/>
 
     <fragment
         android:id="@+id/nav_slideshow"

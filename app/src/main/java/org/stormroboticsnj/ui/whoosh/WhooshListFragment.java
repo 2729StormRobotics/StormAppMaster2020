@@ -3,7 +3,10 @@ package org.stormroboticsnj.ui.whoosh;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,9 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
+import org.stormroboticsnj.ui.display.SharedViewModel;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,24 +28,29 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ListFragment extends Fragment {
+public class WhooshListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
     private List<Whoosh> whooshList;
+
+    MyWhooshRecyclerViewAdapter adapter;
+    private SharedViewModel svm;
+
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListFragment() {
+    public WhooshListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ListFragment newInstance() {
-        ListFragment fragment = new ListFragment();
+    public static WhooshListFragment newInstance() {
+        WhooshListFragment fragment = new WhooshListFragment();
 
         return fragment;
     }
@@ -48,25 +59,29 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
-
+    }
+    public void setWhooshList(List<Whoosh> wl) {
+        whooshList.clear();
+        whooshList.addAll(wl);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_whoosh_list, container, false);
+        MainActivity act = (MainActivity) getActivity();
+        whooshList = act.getData("team_num", 2729);
+        adapter = new MyWhooshRecyclerViewAdapter(whooshList, mListener);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView) view;
 
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            recyclerView.setAdapter(new MyWhooshRecyclerViewAdapter(whooshList, mListener));
+            recyclerView.setAdapter(adapter);
 
         }
 

@@ -8,8 +8,8 @@
     tools:context=".ui.display.DisplayFragment">
 
     <fragment
-        android:id="@+id/fragment"
-        android:name="org.stormroboticsnj.ui.whoosh.ListFragment"
+        android:id="@+id/frag1"
+        android:name="org.stormroboticsnj.ui.whoosh.WhooshListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout="@layout/fragment_whoosh_list" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -27,10 +28,29 @@
         app:layout_constraintGuide_begin="105dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="28dp" />
+        android:text="@string/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/name"
+        app:layout_constraintEnd_toStartOf="@+id/btnSearch"
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
+
+    <Spinner
+        android:id="@+id/spinnerCols"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtVal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
-import org.stormroboticsnj.ui.whoosh.ListFragment.OnListFragmentInteractionListener;
+import org.stormroboticsnj.ui.whoosh.WhooshListFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
@@ -35,11 +35,12 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getTeam());
-        holder.mContentView.setText(mValues.get(position).getScore());
+        holder.mIdView.setText(String.valueOf(mValues.get(position).getTeam()));
+        holder.mContentView.setText(String.valueOf(mValues.get(position).getScore()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,12 +1,10 @@
 package org.stormroboticsnj;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,13 +22,18 @@ import android.view.Menu;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
+import org.stormroboticsnj.ui.display.DisplayFragment;
+import org.stormroboticsnj.ui.whoosh.WhooshListFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
+    private String[] colNames;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_display, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
@@ -55,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
         within onCreate. */
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "stormdb").allowMainThreadQueries().build(); //build database
+
+        StormDao stormdao = db.stormDao();
+        Cursor cursor = stormdao.getCursor();
+        cursor.moveToFirst();
+        colNames = cursor.getColumnNames();
+
+    }
+
+    public String[] getColNames(){
+        return this.colNames;
     }
 
     @Override
@@ -72,7 +85,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public List<Whoosh> getData(String col, int val) {
-        StormDao stormDao = db.stormDao();
-        return stormDao.filterWhooshes(col, val);
+        List<Whoosh> output = new ArrayList();
+
+        Whoosh first = new Whoosh(2729, 1);
+        first.setScore(1);
+        Whoosh second = new Whoosh(2729, 2);
+        second.setScore(28);
+
+        output.add(first);
+        output.add(second);
+        //StormDao stormDao = db.stormDao();
+        //return stormDao.filterWhooshes(col, val);
+        return output;
+    }
+
+    @Override
+    public void onListFragmentInteraction(Whoosh item) {
+        //required implementation
+
+    }
+
+    @Override
+    public List<Whoosh> newSearch(String col, int val) {
+        List<Whoosh> output = new ArrayList();
+
+        Whoosh first = new Whoosh(1490, 3);
+        first.setScore(8);
+        Whoosh second = new Whoosh(1490, 4);
+        second.setScore(35);
+
+        output.add(first);
+        output.add(second);
+        //StormDao stormDao = db.stormDao();
+        //return stormDao.filterWhooshes(col, val);
+
+        WhooshListFragment frag = (WhooshListFragment) getSupportFragmentManager().findFragmentById(R.id.list);
+        frag.setWhooshList(output);
+        return output;
     }
 }
