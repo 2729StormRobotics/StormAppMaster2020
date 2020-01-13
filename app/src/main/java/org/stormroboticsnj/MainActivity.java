@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     }
 
     public List<Whoosh> getData(String col, int val) {
-        List<Whoosh> output = new ArrayList();
+        /* List<Whoosh> output = new ArrayList();
 
         Whoosh first = new Whoosh(2729, 1);
         first.setScore(1);
@@ -93,21 +94,21 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         second.setScore(28);
 
         output.add(first);
-        output.add(second);
-        //StormDao stormDao = db.stormDao();
-        //return stormDao.filterWhooshes(col, val);
-        return output;
+        output.add(second); */ //testing purposes
+        StormDao stormDao = db.stormDao();
+        return stormDao.filterWhooshes(col, val);
+        //return output;
     }
 
     @Override
-    public void onListFragmentInteraction(Whoosh item) {
-        //required implementation
-
+    public List<Whoosh> newSearchWL(String col, int val) {
+        StormDao stormDao = db.stormDao();
+        return stormDao.filterWhooshes(col, val);
     }
 
     @Override
     public List<Whoosh> newSearch(String col, int val) {
-        List<Whoosh> output = new ArrayList();
+        /* List<Whoosh> output = new ArrayList();
 
         Whoosh first = new Whoosh(1490, 3);
         first.setScore(8);
@@ -115,12 +116,10 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         second.setScore(35);
 
         output.add(first);
-        output.add(second);
-        //StormDao stormDao = db.stormDao();
-        //return stormDao.filterWhooshes(col, val);
+        output.add(second); */ //testing purposes
+        StormDao stormDao = db.stormDao();
+        return stormDao.filterWhooshes(col, val);
 
-        WhooshListFragment frag = (WhooshListFragment) getSupportFragmentManager().findFragmentById(R.id.list);
-        frag.setWhooshList(output);
-        return output;
+        //return output;
     }
 }

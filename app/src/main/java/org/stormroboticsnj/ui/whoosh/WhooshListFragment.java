@@ -70,8 +70,9 @@ public class WhooshListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_whoosh_list, container, false);
-        MainActivity act = (MainActivity) getActivity();
-        whooshList = act.getData("team_num", 2729);
+        /* MainActivity act = (MainActivity) getActivity();
+        whooshList = act.getData("team_num", 2729); */
+        whooshList = mListener.newSearchWL("team_num", 2729);
         adapter = new MyWhooshRecyclerViewAdapter(whooshList, mListener);
 
         // Set the adapter
@@ -119,6 +120,6 @@ public class WhooshListFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Whoosh item);
+        List<Whoosh> newSearchWL(String col, int val);
     }
 }

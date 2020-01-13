@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
+import org.stormroboticsnj.ui.whoosh.WhooshListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,8 @@ public class DisplayFragment extends Fragment {
     public void onButtonPressed(String c, int v) {
         if (mListener != null) {
             List<Whoosh> data = mListener.newSearch(c, v);
+            WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
+            frag.setWhooshList(data);
             svm = ViewModelProviders.of(this).get(SharedViewModel.class);
             svm.select(data);
         }
