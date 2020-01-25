@@ -19,6 +19,7 @@ import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.display.SharedViewModel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class WhooshListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
-    private List<Whoosh> whooshList;
+    private List<Whoosh> whooshList = new ArrayList<Whoosh>();
+    // FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
 
     MyWhooshRecyclerViewAdapter adapter;
     private SharedViewModel svm;
@@ -72,7 +74,14 @@ public class WhooshListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_whoosh_list, container, false);
         /* MainActivity act = (MainActivity) getActivity();
         whooshList = act.getData("team_num", 2729); */
-        whooshList = mListener.newSearchWL("team_num", 2729);
+        //whooshList = mListener.newSearchWL("team_num", 2729);
+        //FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
+        for(int i =0; i < 6; ++i) {
+            Whoosh w = new Whoosh(2729, i+1, (i % 2 == 0), 1, 2, 3,
+                    4, 1, 2, 3, (i%2==0), (i%2==0),
+                    1, 2, 3, (i % 3));
+            whooshList.add(w);
+        }
         adapter = new MyWhooshRecyclerViewAdapter(whooshList, mListener);
 
         // Set the adapter

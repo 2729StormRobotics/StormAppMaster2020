@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.Result;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -20,20 +21,32 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.display.DisplayFragment;
 import org.stormroboticsnj.ui.whoosh.WhooshListFragment;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler, DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
     private String[] colNames;
+
+//    private ZXingScannerView mScannerView;
+
+//    public void scanQR(){
+//        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
+//        setContentView(mScannerView);
+//        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+//        mScannerView.startCamera();
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,5 +134,11 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         return stormDao.filterWhooshes(col, val);
 
         //return output;
+    }
+
+    public void handleResult(Result rawResult) {
+        Toast t = new Toast(this);
+        t.setText(rawResult.toString());
+        t.show();
     }
 }

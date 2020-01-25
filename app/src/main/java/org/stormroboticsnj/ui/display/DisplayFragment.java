@@ -96,7 +96,6 @@ public class DisplayFragment extends Fragment {
             svm = ViewModelProviders.of(this).get(SharedViewModel.class);
             svm.select(data);
         }
-
     }
 
     @Override
