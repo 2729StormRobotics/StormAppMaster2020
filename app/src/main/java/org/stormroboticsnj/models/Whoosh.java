@@ -15,6 +15,7 @@ import androidx.room.PrimaryKey;
  */
 @Entity(tableName = "whooshes", primaryKeys = {"team_num", "match_num"})
 public class Whoosh {
+
     @ColumnInfo(name = "team_num") // Column for team number
     private int team; // Private integer variable for team number
     @ColumnInfo(name = "match_num") // Column for match number
@@ -146,6 +147,7 @@ public class Whoosh {
 
     public int getDefenseSecs() { // Return total defense time
         return defenseSecs;
+
     }
 
     public void setTeam(int team) { // Modify team number for Whoosh table
@@ -159,6 +161,7 @@ public class Whoosh {
     public void setAlliance(boolean alliance) { // Modify alliance color for Whoosh table
         this.alliance = alliance;
     }
+
 
     public void setAPowerCell1(int aPowerCell1) { // Modify bottom port power cell auto score for Whoosh table
         this.aPowerCell1 = aPowerCell1;
@@ -229,7 +232,16 @@ public class Whoosh {
 
     public void setDefenseSecs(int defenseSecs) { // Modify defense timer
         this.defenseSecs = defenseSecs;
+
     }
+
+    public void setEPowerCell1(int ePowerCell1) { this.ePowerCell1 = ePowerCell1; }
+
+    public void setEPowerCell2(int ePowerCell2) { this.ePowerCell2 = ePowerCell2; }
+
+    public void setEPowerCell3(int ePowerCell3) { this.ePowerCell3 = ePowerCell3; }
+
+    public void setHang(int hang) { this.hang = hang; }
 
     @NonNull
     @Override
@@ -250,6 +262,7 @@ public class Whoosh {
                 + "," + ePowerCell2
                 + "," + ePowerCell3
                 + "," + locations
+                + "," + hang
                 + "|";
     }
 }
