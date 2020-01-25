@@ -23,6 +23,34 @@ import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
+    /* main data from user app */
+    private int team; // Team number
+    private int match; // Match number
+    private boolean alliance; //true = red, false = blue
+
+    //** recorded in this activity **//
+
+    /* Declare variables*/
+    // Autonomous
+    private int aPowerCell1 = 0; // Power cell score in bottom port
+    private int aPowerCell2 = 0; // Power cell score in outer port
+    private int aPowerCell3 = 0; // Power cell score in inner port
+    private int aPowerCellPickup = 0; // Power cells picked up during Auto
+
+    // Teleop
+    private int tPowerCell1 = 0; // Power cell score in bottom port
+    private int tPowerCell2 = 0; // Power cell score in outer port
+    private int tPowerCell3 = 0; // Power cell score in inner port
+    private boolean positionControl;
+    private boolean rotationControl;
+    private String locations = "";
+
+    // Endgame
+    private int ePowerCell1 = 0; // Power cell score in bottom port
+    private int ePowerCell2 = 0; // Power cell score in outer port
+    private int ePowerCell3 = 0; // Power cell score in inner port
+    private String endgameOutcome = "";
+
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
