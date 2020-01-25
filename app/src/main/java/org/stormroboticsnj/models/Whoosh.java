@@ -235,13 +235,13 @@ public class Whoosh {
 
     }
 
-    public void setEPowerCell1(int ePowerCell1) { this.ePowerCell1 = ePowerCell1; }
+   // public void setEPowerCell1(int ePowerCell1) { this.ePowerCell1 = ePowerCell1; }
 
-    public void setEPowerCell2(int ePowerCell2) { this.ePowerCell2 = ePowerCell2; }
+   // public void setEPowerCell2(int ePowerCell2) { this.ePowerCell2 = ePowerCell2; }
 
-    public void setEPowerCell3(int ePowerCell3) { this.ePowerCell3 = ePowerCell3; }
+   // public void setEPowerCell3(int ePowerCell3) { this.ePowerCell3 = ePowerCell3; }
 
-    public void setHang(int hang) { this.hang = hang; }
+
 
     @NonNull
     @Override
@@ -262,7 +262,7 @@ public class Whoosh {
                 + "," + ePowerCell2
                 + "," + ePowerCell3
                 + "," + locations
-                + "," + hang
+                + "," + endgameOutcome
                 + "|";
     }
 }
