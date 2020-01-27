@@ -76,10 +76,23 @@ public class WhooshListFragment extends Fragment {
         whooshList = act.getData("team_num", 2729); */
         //whooshList = mListener.newSearchWL("team_num", 2729);
         //FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
-        for(int i =0; i < 6; ++i) {
-            Whoosh w = new Whoosh(2729, i+1, (i % 2 == 0), 1, 2, 3,
-                    4, 1, 2, 3, (i%2==0), (i%2==0),
-                    1, 2, 3, (i % 3));
+        for(int i =0; i < 10; ++i) {
+            String h = "";
+            switch (i % 4) {
+                case 0:
+                    h = "L";
+                    break;
+                case 1:
+                    h = "H";
+                    break;
+                case 2:
+                    h = "P";
+                    break;
+                default:
+            }
+            Whoosh w = new Whoosh(2729, i+1, (Math.round((Math.random() * i)) % 2 == 0), 7, 4, 1,
+                    5, 8, 5, 2, (i%2==0), (i%3==0),
+                    9, 6, 3, h, "FW.BL.BS.SZ", (int) Math.round((Math.random() * 135)));
             whooshList.add(w);
         }
         adapter = new MyWhooshRecyclerViewAdapter(whooshList, mListener);

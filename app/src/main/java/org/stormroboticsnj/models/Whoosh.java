@@ -66,7 +66,7 @@ public class Whoosh {
     //probably just for testing purposes
     public Whoosh(int team, int match, boolean alliance, int aPowerCell1, int aPowerCell2, int aPowerCell3, int aPowerCellPickup, int tPowerCell1,
                   int tPowerCell2, int tPowerCell3, boolean rotationControl, boolean positionControl, int ePowerCell1, int ePowerCell2,
-                  int ePowerCell3, int hang) {
+                  int ePowerCell3, String hang, String locations, int defense) {
         this.team = team;
         this.match = match;
         this.alliance = alliance;
@@ -82,7 +82,9 @@ public class Whoosh {
         this.ePowerCell1 = ePowerCell1;
         this.ePowerCell2 = ePowerCell2;
         this.ePowerCell3 = ePowerCell3;
-        this.hang = hang;
+        this.endgameOutcome = hang;
+        this.locations = locations;
+        this.defenseSecs = defense;
     }
 
 

@@ -25,5 +25,6 @@
 
     <string name="communicate">Communicate</string>
     <string name="scan">Scan</string>
+    <string name="power_cells_scored">POWER CELLS SCORED</string>
 
 </resources>
