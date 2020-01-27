@@ -32,49 +32,11 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler, DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
-
-    /* main data from user app */
-    private int team; // Team number
-    private int match; // Match number
-    private boolean alliance; //true = red, false = blue
-
-    //** recorded in this activity **//
-
-    /* Declare variables*/
-    // Autonomous
-    private int aPowerCell1 = 0; // Power cell score in bottom port
-    private int aPowerCell2 = 0; // Power cell score in outer port
-    private int aPowerCell3 = 0; // Power cell score in inner port
-    private int aPowerCellPickup = 0; // Power cells picked up during Auto
-
-    // Teleop
-    private int tPowerCell1 = 0; // Power cell score in bottom port
-    private int tPowerCell2 = 0; // Power cell score in outer port
-    private int tPowerCell3 = 0; // Power cell score in inner port
-    private boolean positionControl;
-    private boolean rotationControl;
-    private String locations = "";
-
-    // Endgame
-    private int ePowerCell1 = 0; // Power cell score in bottom port
-    private int ePowerCell2 = 0; // Power cell score in outer port
-    private int ePowerCell3 = 0; // Power cell score in inner port
-    private String endgameOutcome = "";
+public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
     private String[] colNames;
-
-//    private ZXingScannerView mScannerView;
-
-//    public void scanQR(){
-//        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-//        setContentView(mScannerView);
-//        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-//        mScannerView.startCamera();
-//    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_display, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_display)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -99,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         method of every Activity that uses the database. db can be a class-wide variable or local
         within onCreate. */
         db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "stormdb").allowMainThreadQueries().build(); //build database
+                AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
 
         StormDao stormdao = db.stormDao();
         Cursor cursor = stormdao.getCursor();
@@ -126,21 +87,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                 || super.onSupportNavigateUp();
     }
 
-    public List<Whoosh> getData(String col, int val) {
-        /* List<Whoosh> output = new ArrayList();
-
-        Whoosh first = new Whoosh(2729, 1);
-        first.setScore(1);
-        Whoosh second = new Whoosh(2729, 2);
-        second.setScore(28);
-
-        output.add(first);
-        output.add(second); */ //testing purposes
-        StormDao stormDao = db.stormDao();
-        return stormDao.filterWhooshes(col, val);
-        //return output;
-    }
-
     @Override
     public List<Whoosh> newSearchWL(String col, int val) {
         StormDao stormDao = db.stormDao();
@@ -149,24 +95,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public List<Whoosh> newSearch(String col, int val) {
-        /* List<Whoosh> output = new ArrayList();
-
-        Whoosh first = new Whoosh(1490, 3);
-        first.setScore(8);
-        Whoosh second = new Whoosh(1490, 4);
-        second.setScore(35);
-
-        output.add(first);
-        output.add(second); */ //testing purposes
         StormDao stormDao = db.stormDao();
         return stormDao.filterWhooshes(col, val);
-
-        //return output;
-    }
-
-    public void handleResult(Result rawResult) {
-        Toast t = new Toast(this);
-        t.setText(rawResult.toString());
-        t.show();
     }
 }

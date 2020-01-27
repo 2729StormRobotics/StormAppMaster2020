@@ -9,35 +9,13 @@
         android:enabled="true"
         android:visible="true">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
             android:id="@+id/nav_display"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Display" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_scan" />
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Lookup" />
         <item
             android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
             android:title="@string/menu_tools" />
     </group>
-
-    <item android:title="@string/communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
-
 
 </menu>

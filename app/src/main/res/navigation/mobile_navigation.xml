@@ -17,27 +17,5 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_display"/>
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="org.stormroboticsnj.ScanActivity"
-        android:label="@string/menu_scan"
-        tools:layout="@layout/activity_scan" />
 
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="org.stormroboticsnj.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="org.stormroboticsnj.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="org.stormroboticsnj.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>

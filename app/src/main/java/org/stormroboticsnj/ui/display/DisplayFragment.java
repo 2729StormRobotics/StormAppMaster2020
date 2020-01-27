@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
@@ -68,18 +69,22 @@ public class DisplayFragment extends Fragment {
 
 
         final MainActivity act = (MainActivity) getActivity(); //this might throw exception if (getActivity() instanceOf MainActivity) is false
-        final CharSequence[] colNames = act.getColNames();
-        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter(getActivity().getApplicationContext(),  android.R.layout.simple_spinner_item, colNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final CharSequence[] colNames = {"team_num", "match_num"};
+        final CharSequence[] displayNames = {"Team Number", "Match Number"};
+        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(),  R.layout.spinner_item, displayNames);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colSpinner.setAdapter(adapter);
-
-
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*get field and search value, error if nonexistant */
-                if (searchBox.getText().equals("")) {return;} //TODO: Add error message
+                if (searchBox.getText().equals("")) {
+                    Toast t = new Toast(getContext());
+                    t.setText("Please enter a value to search for");
+                    t.show();
+                    return;
+                }
                 int filterVal = Integer.parseInt(searchBox.getText().toString());
                 onButtonPressed(colNames[colSpinner.getSelectedItemPosition()].toString(), filterVal);
             }
