@@ -1,22 +1,22 @@
 package org.stormroboticsnj;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
-import android.view.Menu;
+import com.google.android.material.navigation.NavigationView;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
@@ -28,7 +28,7 @@ import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
-        RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener {
+        RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
@@ -99,5 +99,49 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     public List<Whoosh> getAll() {
         StormDao stormDao = db.stormDao();
         return stormDao.getWhooshesByTeam();
+    }
+
+    @Override
+    public void clearDatabase() {
+        new AlertDialog.Builder(this) //confirm with user
+                .setTitle("Clear Data")
+                .setMessage("Are you sure you want to completely clear the local database? This action is permanent.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //clear database table
+                        db.clearAllTables();
+                        Toast.makeText(getApplicationContext(), "Database cleared", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                })
+                .setIcon(R.mipmap.ic_launcher)
+                .show();
+    }
+
+    @Override
+    public void dumpDatabase() {
+        new android.app.AlertDialog.Builder(MainActivity.this)
+                .setTitle("Dump Database")
+                .setMessage("Dump the database to a CSV file on the device.  Are you sure?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Toast.makeText(MainActivity.this, "Database Dumped", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
 }

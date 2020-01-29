@@ -1,7 +1,6 @@
 package org.stormroboticsnj;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,20 +68,25 @@ public class DatabaseTools extends Fragment {
         View v = inflater.inflate(R.layout.fragment_database_tools, container, false);
 
         final Button dump = v.findViewById(R.id.btnDump);
-        final Button clean = v.findViewById(R.id.btnClean);
+        final Button clean = v.findViewById(R.id.btnClear);
 
+        final MainActivity act = new MainActivity();
 
+        dump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // Inflate the layout for this fragment
-        return v;
-    }
+            }
+        });
 
+        clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                act.clearDatabase();
+            }
+        });
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        return v; // Inflate the layout for this fragment
     }
 
     @Override
@@ -114,6 +118,8 @@ public class DatabaseTools extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void clearDatabase();
+        void dumpDatabase();
     }
+
 }

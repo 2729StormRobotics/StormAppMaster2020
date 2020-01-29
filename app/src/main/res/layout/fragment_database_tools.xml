@@ -8,11 +8,11 @@
     tools:context=".DatabaseTools" >
 
     <Button
-        android:id="@+id/btnClean"
+        android:id="@+id/btnClear"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:background="@drawable/mybuttonorange"
-        android:text="Clean"
+        android:text="Clear"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
