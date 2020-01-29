@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rank_options">
+        <!--<item>Autonomous Power Cells Total</item>-->
+        <item>Auto Bottom Power Cells per Second</item>
+        <item>Auto Outer Power Cells per Second</item>
+        <item>Auto Inner Power Cells per Second</item>
+        <item>Auto Power Cell Pickup</item>
+        <item>Teleop Power Cells Bottom Port</item>
+        <item>Teleop Power Cells Outer Port</item>
+        <item>Teleop Power Cells Inner Port</item>
+        <item>Teleop Rotation Control</item>
+        <item>Teleop Position Control</item>
+        <item>Endgame Power Cells Bottom Port</item>
+        <item>Endgame Power Cells Outer Port</item>
+        <item>Endgame Power Cells Inner Port</item>
+        <item>Endgame Hang</item>
+        <item>Endgame Hang Level</item>
+    </string-array>
+</resources>
