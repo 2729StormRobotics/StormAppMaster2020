@@ -1,18 +1,14 @@
 package org.stormroboticsnj;
 
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.zxing.Result;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -21,18 +17,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import android.view.Menu;
-import android.widget.Toast;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.display.DisplayFragment;
-import org.stormroboticsnj.ui.whoosh.WhooshListFragment;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
+import org.stormroboticsnj.ui.rank.RankFragment;
+import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
+        RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_display)
+                R.id.nav_home, R.id.nav_display, R.id.nav_rank)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
 
     }
 
-    public String[] getColNames(){
+    public String[] getColNames() {
         return this.colNames;
     }
 
@@ -97,5 +93,11 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     public List<Whoosh> newSearch(String col, int val) {
         StormDao stormDao = db.stormDao();
         return stormDao.filterWhooshes(col, val);
+    }
+
+    @Override
+    public List<Whoosh> getAll() {
+        StormDao stormDao = db.stormDao();
+        return stormDao.getWhooshesByTeam();
     }
 }

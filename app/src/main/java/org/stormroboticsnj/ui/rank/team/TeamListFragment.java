@@ -1,26 +1,23 @@
-package org.stormroboticsnj.ui.whoosh;
+package org.stormroboticsnj.ui.rank.team;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.stormroboticsnj.MainActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.stormroboticsnj.R;
+import org.stormroboticsnj.models.Team;
+import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.display.SharedViewModel;
+import org.stormroboticsnj.ui.rank.team.MyTeamRecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,16 +26,16 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class WhooshListFragment extends Fragment {
+public class TeamListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
-    private List<Whoosh> whooshList = new ArrayList<Whoosh>();
+    private List<Team> teamList = new ArrayList<>();
     // FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
 
-    MyWhooshRecyclerViewAdapter adapter;
+    MyTeamRecyclerViewAdapter adapter;
     private SharedViewModel svm;
 
 
@@ -46,13 +43,13 @@ public class WhooshListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WhooshListFragment() {
+    public TeamListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static WhooshListFragment newInstance() {
-        WhooshListFragment fragment = new WhooshListFragment();
+    public static TeamListFragment newInstance() {
+        TeamListFragment fragment = new TeamListFragment();
 
         return fragment;
     }
@@ -62,40 +59,25 @@ public class WhooshListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    public void setWhooshList(List<Whoosh> wl) {
-        whooshList.clear();
-        whooshList.addAll(wl);
+    public void setTeamList(List<Team> wl) {
+        teamList.clear();
+        teamList.addAll(wl);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_whoosh_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_team_list, container, false);
         /* MainActivity act = (MainActivity) getActivity();
-        whooshList = act.getData("team_num", 2729); */
-        //whooshList = mListener.newSearchWL("team_num", 2729);
+        teamList = act.getData("team_num", 2729); */
+        //teamList = mListener.newSearchWL("team_num", 2729);
         //FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
         for(int i =0; i < 10; ++i) {
-            String h = "";
-            switch (i % 4) {
-                case 0:
-                    h = "L";
-                    break;
-                case 1:
-                    h = "H";
-                    break;
-                case 2:
-                    h = "P";
-                    break;
-                default:
-            }
-            Whoosh w = new Whoosh(2729, i+1, (Math.round((Math.random() * i)) % 2 == 0), 7, 4, 1,
-                    5, 8, 5, 2, (i%2==0), (i%3==0),
-                    9, 6, 3, h, "FW.BL.BS.SZ", (int) Math.round((Math.random() * 135)));
-            whooshList.add(w);
+            Team w = new Team();
+            teamList.add(w);
         }
-        adapter = new MyWhooshRecyclerViewAdapter(whooshList, mListener);
+        adapter = new MyTeamRecyclerViewAdapter(teamList, mListener);
 
         // Set the adapter
         if (view instanceof RecyclerView) {

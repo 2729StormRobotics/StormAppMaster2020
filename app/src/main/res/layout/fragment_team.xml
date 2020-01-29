@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="16dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingEnd="5dp"
+    android:paddingRight="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:id="@+id/team_team_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewStart"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Team" TEAM#-->
+
+                <TextView
+                    android:id="@+id/team_match_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--MATCHES# "Matches Played"-->
+            </TableRow>
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="AVERAGE POWER CELLS SCORED"
+                    android:textAlignment="center"
+                    android:textAppearance="?textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"AVERAGE POWER CELLS SCORED"-->
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--BLANK-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Auto"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Auto"-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Teleop"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Teleop"-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Endgame"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Endgame"-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Total"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Total"-->
+            </TableRow>
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Inner"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Inner"-->
+
+                <TextView
+                    android:id="@+id/team_inner_auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--AUTO3-->
+
+                <TextView
+                    android:id="@+id/team_inner_teleop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TELE3-->
+
+                <TextView
+                    android:id="@+id/team_inner_endgame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--END3-->
+
+                <TextView
+                    android:id="@+id/team_inner_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TOT3-->
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Outer"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Outer"-->
+
+                <TextView
+                    android:id="@+id/team_outer_auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--AUTO2-->
+
+                <TextView
+                    android:id="@+id/team_outer_teleop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TELE2-->
+
+                <TextView
+                    android:id="@+id/team_outer_endgame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--END2-->
+
+                <TextView
+                    android:id="@+id/team_outer_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TOT2-->
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Bottom"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Bottom"-->
+
+                <TextView
+                    android:id="@+id/team_bottom_auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--AUTO1-->
+
+                <TextView
+                    android:id="@+id/team_bottom_teleop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TELE1-->
+
+                <TextView
+                    android:id="@+id/team_bottom_endgame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--END1-->
+
+                <TextView
+                    android:id="@+id/team_bottom_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TOT1-->
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Total"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Total"-->
+
+                <TextView
+                    android:id="@+id/team_auto_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--AUTO TOTAL-->
+
+                <TextView
+                    android:id="@+id/team_tele_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TELE TOTAL-->
+
+                <TextView
+                    android:id="@+id/team_end_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--END TOTAL-->
+
+                <TextView
+                    android:id="@+id/team_total_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graytranscell"
+                    android:fontFamily="monospace"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAlignment="viewEnd"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--TOTAL TOTAL-->
+
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/team_defense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--OFFENSE SECONDS / PC-->
+<!--                android:background="@drawable/clip"-->
+
+
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp">
+
+            <TableRow android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/team_apick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /><!--AUTO PICKUP-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="  Average Power Cells picked up during Auto"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /><!--" Average Power Cells picked up during Auto-->
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:id="@+id/team_rot_con"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Rotation Control" X/X "Matches"-->
+
+                <TextView
+                    android:id="@+id/team_pos_con"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Position Control" X/X "Matches"-->
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_width="0dp">
+
+                <TextView
+                    android:id="@+id/team_park"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Park" X/X Matches-->
+                <TextView
+                    android:id="@+id/team_hang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Hang" X/X Matches-->
+                <TextView
+                    android:id="@+id/team_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Level Hang" X/X Matches-->
+
+            </TableRow>
+        </TableLayout>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:stretchColumns="1,2,3,4,5,6,7">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/team_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="Scored from: "
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"Scored from: "-->
+                <TextView
+                    android:id="@+id/team_bs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="BS"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"BS X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_fs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="FS"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"FS X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_bw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="BW"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"BW X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_fw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="FW"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"FW X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_bl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="BL"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"BL X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_fl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="FL"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"FL X" (FORMAT)-->
+                <TextView
+                    android:id="@+id/team_sz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="SZ"
+                    android:textAlignment="center"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" /> <!--"SZ X" (FORMAT)-->
+            </TableRow>
+
+
+        </TableLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+

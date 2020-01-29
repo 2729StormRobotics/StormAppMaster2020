@@ -1,11 +1,8 @@
-package org.stormroboticsnj.ui.whoosh;
+package org.stormroboticsnj.ui.display.whoosh;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ClipDrawable;
@@ -15,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
-import org.stormroboticsnj.ui.whoosh.WhooshListFragment.OnListFragmentInteractionListener;
+import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment.OnListFragmentInteractionListener;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;

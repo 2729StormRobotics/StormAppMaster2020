@@ -39,4 +39,9 @@ public interface StormDao {
 
     @Query("SELECT * FROM whooshes")
     public Cursor getCursor();
+
+    @Query("SELECT * FROM whooshes ORDER BY team_num")
+    public List<Whoosh> getWhooshesByTeam();
+
+
 }

@@ -14,8 +14,14 @@
     <fragment
         android:id="@+id/nav_display"
         android:name="org.stormroboticsnj.ui.display.DisplayFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_lookup"
         tools:layout="@layout/fragment_display"/>
+
+    <fragment
+        android:id="@+id/nav_rank"
+        android:name="org.stormroboticsnj.ui.rank.RankFragment"
+        android:label="@string/menu_rank"
+        tools:layout="@layout/fragment_rank" />
 
 
 </navigation>

@@ -1,11 +1,9 @@
 package org.stormroboticsnj.ui.display;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -20,9 +18,8 @@ import android.widget.Toast;
 import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Whoosh;
-import org.stormroboticsnj.ui.whoosh.WhooshListFragment;
+import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

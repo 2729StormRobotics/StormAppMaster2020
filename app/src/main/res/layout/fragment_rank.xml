@@ -5,12 +5,12 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.display.DisplayFragment"
+    tools:context=".ui.rank.RankFragment"
     android:background="#E8E8E8">
 
     <fragment
-        android:id="@+id/frag1"
-        android:name="org.stormroboticsnj.ui.display.whoosh.WhooshListFragment"
+        android:id="@+id/frag2"
+        android:name="org.stormroboticsnj.ui.rank.team.TeamListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,30 +29,20 @@
         app:layout_constraintGuide_begin="105dp" />
 
     <Button
-        android:id="@+id/btnSearch"
+        android:id="@+id/btnRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
+        android:text="@string/rank"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtVal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="15"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/btnSearch"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Spinner
-        android:id="@+id/spinnerCols"
+        android:id="@+id/rankSpinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtVal"
-        app:layout_constraintEnd_toStartOf="@+id/txtVal"
+        app:layout_constraintBottom_toTopOf="@+id/frag2"
+        app:layout_constraintEnd_toEndOf="@+id/btnRank"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
