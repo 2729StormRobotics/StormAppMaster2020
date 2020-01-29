@@ -60,8 +60,61 @@ public class MyTeamRecyclerViewAdapter extends RecyclerView.Adapter<MyTeamRecycl
         holder.mA3View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgAPowerCells3())); //inner auto
         holder.mT3View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgTPowerCells3())); //inner tele
         holder.mE3View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgEPowerCells3())); //inner end
+        holder.mTot3View.setText(String.format(Locale.US, "%.2f", (holder.mItem.getAvgAPowerCells3()
+                                                    + holder.mItem.getAvgTPowerCells3()
+                                                    + holder.mItem.getAvgEPowerCells3())));
 
+        holder.mA2View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgAPowerCells2())); //inner auto
+        holder.mT2View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgTPowerCells2())); //inner auto
+        holder.mE2View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgEPowerCells2())); //inner auto
+        holder.mTot2View.setText(String.format(Locale.US, "%.2f", (holder.mItem.getAvgAPowerCells2()
+                + holder.mItem.getAvgTPowerCells2()
+                + holder.mItem.getAvgEPowerCells2())));
 
+        holder.mA1View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgAPowerCells1())); //inner auto
+        holder.mT1View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgTPowerCells1())); //inner auto
+        holder.mE1View.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgEPowerCells1())); //inner auto
+        holder.mTot1View.setText(String.format(Locale.US, "%.2f", (holder.mItem.getAvgAPowerCells1()
+                + holder.mItem.getAvgTPowerCells1()
+                + holder.mItem.getAvgEPowerCells1())));
+
+        holder.mATotView.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgAutoPowerCells())); //inner auto
+        holder.mTTotView.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgTeleopPowerCells())); //inner auto
+        holder.mETotView.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgEndgamePowerCells())); //inner auto
+        holder.mTotView.setText(String.format(Locale.US, "%.2f", (holder.mItem.getAvgAutoPowerCells()
+                + holder.mItem.getAvgTeleopPowerCells()
+                + holder.mItem.getAvgEndgamePowerCells())));
+
+        holder.mCycleView.setText(String.format(Locale.US, "Average %.2f Offense Seconds Per Power Cell", holder.mItem.getAvgOffenseSecondsPerPC()));
+
+        holder.mAPickView.setText(String.format(Locale.US, "%.2f", holder.mItem.getAvgAutoPowerCells()));
+
+        holder.mRCView.setText(String.format(Locale.US, "Rotation Control %d/%d Matches", holder.mItem.getRotationControlMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        holder.mPCView.setText(String.format(Locale.US, "Position Control %d/%d Matches", holder.mItem.getPositionControlMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        holder.mPCView.setText(String.format(Locale.US, "Park %d/%d Matches", holder.mItem.getParkMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        holder.mPCView.setText(String.format(Locale.US, "Park %d/%d Matches", holder.mItem.getParkMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        holder.mPCView.setText(String.format(Locale.US, "Hang %d/%d Matches", holder.mItem.getHangMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        holder.mPCView.setText(String.format(Locale.US, "Level %d/%d Matches", holder.mItem.getLevelMatchesCount(),
+                (holder.mItem.getMatches().size())));
+
+        int[] locationsCount = holder.mItem.getLocationsFrequency(); //format: {BS, FS, BW, FW, BL, FL, SZ}
+        holder.mBSView.setText(String.format(Locale.US, "BS %d", locationsCount[0]));
+        holder.mFSView.setText(String.format(Locale.US, "BS %d", locationsCount[1]));
+        holder.mBWView.setText(String.format(Locale.US, "BS %d", locationsCount[2]));
+        holder.mFWView.setText(String.format(Locale.US, "BS %d", locationsCount[3]));
+        holder.mBLView.setText(String.format(Locale.US, "BS %d", locationsCount[4]));
+        holder.mFLView.setText(String.format(Locale.US, "BS %d", locationsCount[5]));
+        holder.mSZView.setText(String.format(Locale.US, "BS %d", locationsCount[6]));
     }
 
     @Override
@@ -76,7 +129,7 @@ public class MyTeamRecyclerViewAdapter extends RecyclerView.Adapter<MyTeamRecycl
         public final TextView mTeamView, mMatchView, mA3View, mT3View, mE3View, mTot3View, mA2View, mT2View,
                 mE2View, mTot2View, mA1View, mT1View, mE1View, mTot1View, mATotView, mTTotView,
                 mETotView, mTotView, mAPickView, mRCView, mPCView, mParkView, mHangView, mLevelView,
-                mDefView, mBSView, mFSView, mBWView, mFWView, mBLView, mFLView, mSZView;
+                mCycleView, mBSView, mFSView, mBWView, mFWView, mBLView, mFLView, mSZView;
         //public final View mBar;
         public Team mItem;
 
@@ -110,7 +163,7 @@ public class MyTeamRecyclerViewAdapter extends RecyclerView.Adapter<MyTeamRecycl
             mParkView = view.findViewById(R.id.team_park);
             mHangView = view.findViewById(R.id.team_hang);
             mLevelView = view.findViewById(R.id.team_level);
-            mDefView = view.findViewById(R.id.team_defense);
+            mCycleView = view.findViewById(R.id.team_cycle_time);
             mBSView = view.findViewById(R.id.team_bs);
             mFSView = view.findViewById(R.id.team_fs);
             mBWView = view.findViewById(R.id.team_bw);

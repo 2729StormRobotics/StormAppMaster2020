@@ -393,7 +393,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/team_defense"
+                    android:id="@+id/team_cycle_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="2dp"

@@ -69,47 +69,44 @@ public class RankFragment extends Fragment {
 
         final MainActivity act = (MainActivity) getActivity(); //this might throw exception if (getActivity() instanceOf MainActivity) is false
         final RankEnum[] colNames = {
-                RankEnum.POWER_CELLS_BOTTOM_AUTO,
-                RankEnum.POWER_CELLS_OUTER_AUTO,
-                RankEnum.POWER_CELLS_INNER_AUTO,
-                RankEnum.POWER_CELLS_AUTO,
-                RankEnum.POWER_CELL_PICKUP,
-
-                RankEnum.POWER_CELLS_BOTTOM_TELEOP,
-                RankEnum.POWER_CELLS_OUTER_TELEOP,
-                RankEnum.POWER_CELLS_INNER_TELEOP,
                 RankEnum.POWER_CELLS_TELEOP,
                 RankEnum.CYCLE_TIME,
-
-                RankEnum.POWER_CELLS_BOTTOM_ENDGAME,
-                RankEnum.POWER_CELLS_OUTER_ENDGAME,
-                RankEnum.POWER_CELLS_INNER_ENDGAME,
+                RankEnum.POWER_CELLS_AUTO,
                 RankEnum.POWER_CELLS_ENDGAME,
-
-                RankEnum.ROTATION_CONTROL,
-                RankEnum.POSITION_CONTROL,
-
                 RankEnum.ENDGAME_HANG,
-                RankEnum.ENDGAME_LEVEL_HANG};
+                RankEnum.ENDGAME_LEVEL_HANG,
+                RankEnum.POWER_CELLS_INNER_AUTO,
+                RankEnum.POWER_CELLS_OUTER_AUTO,
+                RankEnum.POWER_CELLS_BOTTOM_AUTO,
+                RankEnum.POWER_CELL_PICKUP,
+                RankEnum.POWER_CELLS_INNER_TELEOP,
+                RankEnum.POWER_CELLS_OUTER_TELEOP,
+                RankEnum.POWER_CELLS_BOTTOM_TELEOP,
+                RankEnum.POWER_CELLS_INNER_ENDGAME,
+                RankEnum.POWER_CELLS_OUTER_ENDGAME,
+                RankEnum.POWER_CELLS_BOTTOM_ENDGAME,
+                RankEnum.ROTATION_CONTROL,
+                RankEnum.POSITION_CONTROL,};
         final CharSequence[] displayNames = {
+                "Teleop Total PC",
+                "OFFENSE SECONDS PER PC",
+                "Auto Total PC",
+                "Endgame Total PC",
+                "Hang Frequency",
+                "Level Hang Frequency",
+                "Teleop Inner PC",
+                "Teleop Outer PC",
+                "Teleop Bottom PC",
                 "Auto Bottom PC",
                 "Auto Outer PC",
                 "Auto Inner PC",
-                "Auto Total PC",
                 "Auto PC Pickup",
-                "Teleop Bottom PC",
-                "Teleop Outer PC",
-                "Teleop Inner PC",
-                "Teleop Total PC",
-                "OFFENSE SECONDS PER PC",
-                "Endgame Bottom PC",
-                "Endgame Outer PC",
                 "Endgame Inner PC",
-                "Endgame Total PC",
+                "Endgame Outer PC",
+                "Endgame Bottom PC",
                 "Rotation Control Frequency",
                 "Position Control Frequency",
-                "Hang Frequency",
-                "Level Hang Frequency"};
+                };
         final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.spinner_item, displayNames);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colSpinner.setAdapter(adapter);

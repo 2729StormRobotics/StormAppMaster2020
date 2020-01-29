@@ -221,6 +221,54 @@ public class Team {
         return ((105.0 * matches.size()) - secondsDefense) / pcScored;
     }
 
+    public int getRotationControlMatchesCount() {
+        int output = 0;
+
+        for (Whoosh whoosh : matches) {
+            if (whoosh.isRotationControl()) output++;
+        }
+
+        return output;
+    }
+    public int getPositionControlMatchesCount() {
+        int output = 0;
+
+        for (Whoosh whoosh : matches) {
+            if (whoosh.isRotationControl()) output++;
+        }
+
+        return output;
+    }
+
+    public int getParkMatchesCount() {
+        int output = 0;
+
+        for (Whoosh whoosh : matches) {
+            if (whoosh.getEndgameOutcome().equals("P")) output++;
+        }
+
+        return output;
+    }
+    public int getHangMatchesCount() {
+        int output = 0;
+
+        for (Whoosh whoosh : matches) {
+            if (whoosh.getEndgameOutcome().equals("L") || whoosh.getEndgameOutcome().equals("H")) output++;
+        }
+
+        return output;
+    }
+
+    public int getLevelMatchesCount() {
+        int output = 0;
+
+        for (Whoosh whoosh : matches) {
+            if (whoosh.getEndgameOutcome().equals("L")) output++;
+        }
+
+        return output;
+    }
+
     public int[] getLocationsFrequency() {
         // format: {BS, FS, BW, FW, BL, FL, SZ}
         int[] totals = {0, 0, 0, 0, 0, 0, 0};
