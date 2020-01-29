@@ -68,16 +68,15 @@ public class DatabaseTools extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_database_tools, container, false);
 
-        final Button dump = findViewById(R.id.btnDump);
-        final Button clean = findViewById(R.id.btnClean);
+        final Button dump = v.findViewById(R.id.btnDump);
+        final Button clean = v.findViewById(R.id.btnClean);
+
+
 
         // Inflate the layout for this fragment
         return v;
     }
 
-    private Object findViewById(int btnDump) {
-        return findViewById(btnDump);
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
