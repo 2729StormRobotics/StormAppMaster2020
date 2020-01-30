@@ -150,16 +150,16 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     }
 
     private void dump() {
-        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+        File exportDir = new File(Environment.getDataDirectory(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
 
-        File file = new File(exportDir, fileName + ".csv");
+        File file = new File(exportDir, "stormexport" + ".csv");
         try {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-            Cursor curCSV = db.query("SELECT * FROM " + TableName, null);
+            Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
                 //Which column you want to exprort
@@ -170,8 +170,9 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
             }
             csvWrite.close();
             curCSV.close();
-            ToastHelper.showToast(this, "Exported", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Database Exported to csv", Toast.LENGTH_SHORT);
         } catch (Exception sqlEx) {
 
         }
+    }
 }

@@ -37,7 +37,7 @@ public class ResultTask extends AsyncTask<String, Integer, Boolean> {
                 w = new Whoosh();
                 w.setTeam(Integer.parseInt(whooshSub[0]));
                 w.setMatch(Integer.parseInt(whooshSub[1]));
-                w.setAlliance(whoosh[2].equals("r"));
+                w.setAlliance(whooshSub[2].equals("r"));
                 w.setAPowerCell1(Integer.parseInt(whooshSub[3]));
                 w.setAPowerCell2(Integer.parseInt(whooshSub[4]));
                 w.setAPowerCell3(Integer.parseInt(whooshSub[5]));
@@ -56,7 +56,8 @@ public class ResultTask extends AsyncTask<String, Integer, Boolean> {
             }
 
         } catch (Exception e) {
-            return false;
+            Log.d("Failed", e.toString());
+
         }
         return true;
     }
