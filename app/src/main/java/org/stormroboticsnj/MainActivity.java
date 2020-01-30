@@ -3,6 +3,7 @@ package org.stormroboticsnj;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
+import com.opencsv.*;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
@@ -25,6 +27,8 @@ import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
 import org.stormroboticsnj.ui.rank.RankFragment;
 import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        dump();
                         Toast.makeText(MainActivity.this, "Database Dumped", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -144,4 +148,30 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                 })
                 .show();
     }
+
+    private void dump() {
+        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+        if (!exportDir.exists()) {
+            exportDir.mkdirs();
+        }
+
+        File file = new File(exportDir, fileName + ".csv");
+        try {
+            file.createNewFile();
+            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+            Cursor curCSV = db.query("SELECT * FROM " + TableName, null);
+            csvWrite.writeNext(curCSV.getColumnNames());
+            while (curCSV.moveToNext()) {
+                //Which column you want to exprort
+                String arrStr[] = new String[curCSV.getColumnCount()];
+                for (int i = 0; i < curCSV.getColumnCount() - 1; i++)
+                    arrStr[i] = curCSV.getString(i);
+                csvWrite.writeNext(arrStr);
+            }
+            csvWrite.close();
+            curCSV.close();
+            ToastHelper.showToast(this, "Exported", Toast.LENGTH_SHORT);
+        } catch (Exception sqlEx) {
+
+        }
 }
