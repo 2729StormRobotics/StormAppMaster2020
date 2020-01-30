@@ -9,6 +9,14 @@
         android:enabled="true"
         android:visible="true">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/star_off"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/scan_qr" />
+        <item
             android:id="@+id/nav_display"
             android:icon="@android:drawable/ic_menu_search"
             android:title="@string/menu_lookup" />
@@ -16,6 +24,7 @@
             android:id="@+id/nav_rank"
             android:icon="@android:drawable/ic_menu_sort_by_size"
             android:title="@string/menu_rank" />
+
     </group>
 
 </menu>

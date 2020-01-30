@@ -17,8 +17,10 @@
     <string name="power_cells_scored">POWER CELLS SCORED</string>
     <string name="menu_lookup">Lookup</string>
     <string name="menu_tools">Rank Teams</string>
-    <string name="menu_home">Home</string>
     <string name="menu_rank">Rank Teams</string>
     <string name="rank">Rank</string>
+    <string name="menu_scan">Scan</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="menu_home">Home</string>
 
 </resources>

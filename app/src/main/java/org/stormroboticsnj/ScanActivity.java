@@ -1,5 +1,6 @@
 package org.stormroboticsnj;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -25,7 +26,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-        setContentView(R.layout.activity_scan);
+        setContentView(mScannerView);
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
     }
@@ -44,41 +45,47 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     @Override
-    public void handleResult(Result rawResult) {
-        Whoosh w;
-        StormDao stormDao = db.stormDao();
+    public void handleResult(final Result rawResult) {
+        mScannerView.stopCamera();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Whoosh w;
+                StormDao stormDao = db.stormDao();
 
 
-        // Do something with the result here
-        Log.v(TAG, rawResult.getText()); // Prints scan results
-        Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
+                // Do something with the result here
+                Log.v(TAG, rawResult.getText()); // Prints scan results
+                Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
-        String[] whoosh = rawResult.toString().split(Pattern.quote("|"));
-        String[] whooshSub;
+                String[] whoosh = rawResult.toString().split(Pattern.quote("|"));
+                String[] whooshSub;
 
-        for (int i = 0; i < whoosh.length; i++) {
-            whooshSub = whoosh[i].split(Pattern.quote(","));
-            w = new Whoosh();
-            w.setTeam(Integer.parseInt(whooshSub[0]));
-            w.setMatch(Integer.parseInt(whooshSub[1]));
-            w.setAlliance(whoosh[2].equals("r"));
-            w.setAPowerCell1(Integer.parseInt(whooshSub[3]));
-            w.setAPowerCell2(Integer.parseInt(whooshSub[4]));
-            w.setAPowerCell3(Integer.parseInt(whooshSub[5]));
-            w.setAPowerCellPickup(Integer.parseInt(whooshSub[6]));
-            w.setTPowerCell1(Integer.parseInt(whooshSub[7]));
-            w.setTPowerCell2(Integer.parseInt(whooshSub[8]));
-            w.setTPowerCell3(Integer.parseInt(whooshSub[9]));
-            w.setTPowerCell3(Integer.parseInt(whooshSub[10]));
-            w.setRotationControl(whooshSub[11].equals("y"));
-            w.setPositionControl(whooshSub[12].equals("y"));
-            w.setEPowerCell1(Integer.parseInt(whooshSub[13]));
-            w.setEPowerCell2(Integer.parseInt(whooshSub[14]));
-            w.setEPowerCell3(Integer.parseInt(whooshSub[15]));
-            w.setLocations(whooshSub[16]);
-            w.setEndgameOutcome(whooshSub[17]);
-            stormDao.insertWhooshes(w);
-        }
+                for (int i = 0; i < whoosh.length; i++) {
+                    whooshSub = whoosh[i].split(Pattern.quote(","));
+                    w = new Whoosh();
+                    w.setTeam(Integer.parseInt(whooshSub[0]));
+                    w.setMatch(Integer.parseInt(whooshSub[1]));
+                    w.setAlliance(whoosh[2].equals("r"));
+                    w.setAPowerCell1(Integer.parseInt(whooshSub[3]));
+                    w.setAPowerCell2(Integer.parseInt(whooshSub[4]));
+                    w.setAPowerCell3(Integer.parseInt(whooshSub[5]));
+                    w.setAPowerCellPickup(Integer.parseInt(whooshSub[6]));
+                    w.setTPowerCell1(Integer.parseInt(whooshSub[7]));
+                    w.setTPowerCell2(Integer.parseInt(whooshSub[8]));
+                    w.setTPowerCell3(Integer.parseInt(whooshSub[9]));
+                    w.setRotationControl(whooshSub[10].equals("y"));
+                    w.setPositionControl(whooshSub[11].equals("y"));
+                    w.setEPowerCell1(Integer.parseInt(whooshSub[12]));
+                    w.setEPowerCell2(Integer.parseInt(whooshSub[13]));
+                    w.setEPowerCell3(Integer.parseInt(whooshSub[14]));
+                    w.setLocations(whooshSub[15]);
+                    w.setEndgameOutcome(whooshSub[16]);
+                    stormDao.insertWhooshes(w);
+                }
+            }
+        });
+
         /*try {
             Parser.parse(rawResult, this);
         } catch (IOException e) {
