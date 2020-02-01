@@ -1,19 +1,15 @@
 package org.stormroboticsnj;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import org.stormroboticsnj.dao.StormDao;
-import org.stormroboticsnj.models.Whoosh;
-
-import java.util.regex.Pattern;
+import java.util.Collections;
+import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -28,6 +24,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);
+        List<BarcodeFormat> formats = Collections.singletonList(BarcodeFormat.QR_CODE);
+        mScannerView.setFormats(formats);
+
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
 
