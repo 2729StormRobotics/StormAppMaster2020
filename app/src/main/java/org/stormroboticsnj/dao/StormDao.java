@@ -32,8 +32,11 @@ public interface StormDao {
     @Query("SELECT * FROM whooshes")
     public List<Whoosh> getAllWhooshes();
 
-    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal")
-    public List<Whoosh> filterWhooshes(String colName, int searchVal);
+    @Query("SELECT * FROM whooshes WHERE team_num=:teamNum")
+    public List<Whoosh> getByTeamNumber(int teamNum);
+
+    @Query("SELECT * FROM whooshes WHERE match_num=:matchNum")
+    public List<Whoosh> getByMatchNumber(int matchNum);
 
     @Query("SELECT * FROM whooshes WHERE :colName=:searchVal ORDER BY :sortColName")
     public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName);
@@ -43,6 +46,8 @@ public interface StormDao {
 
     @Query("SELECT * FROM whooshes ORDER BY team_num")
     public List<Whoosh> getWhooshesByTeam();
+
+
 
 
 }

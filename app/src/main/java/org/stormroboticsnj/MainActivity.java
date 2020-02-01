@@ -2,6 +2,7 @@ package org.stormroboticsnj;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -90,13 +91,14 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public List<Whoosh> newSearchWL(String col, int val) {
         StormDao stormDao = db.stormDao();
-        return stormDao.filterWhooshes(col, val);
+        return stormDao.getByTeamNumber(val);
     }
 
     @Override
-    public List<Whoosh> newSearch(String col, int val) {
+    public List<Whoosh> newSearch(boolean team, int val) {
         StormDao stormDao = db.stormDao();
-        return stormDao.filterWhooshes(col, val);
+        if (team) return stormDao.getByTeamNumber(val);
+        else return stormDao.getByMatchNumber(val);
     }
 
     @Override

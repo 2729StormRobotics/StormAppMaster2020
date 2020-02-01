@@ -8,6 +8,7 @@ import androidx.room.Room;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);
-        List<BarcodeFormat> formats = Collections.singletonList(BarcodeFormat.QR_CODE);
+        List<BarcodeFormat> formats = new ArrayList<>();
+        formats.add(BarcodeFormat.QR_CODE);
         mScannerView.setFormats(formats);
 
         db = Room.databaseBuilder(getApplicationContext(),

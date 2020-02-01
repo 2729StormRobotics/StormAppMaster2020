@@ -83,20 +83,25 @@ public class DisplayFragment extends Fragment {
                     return;
                 }
                 int filterVal = Integer.parseInt(searchBox.getText().toString());
-                onButtonPressed(colNames[colSpinner.getSelectedItemPosition()].toString(), filterVal);
+                onButtonPressed(colSpinner.getSelectedItemPosition() == 0, filterVal);
             }
         });
         return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String c, int v) {
+    public void onButtonPressed(boolean t, int v) {
         if (mListener != null) {
-            List<Whoosh> data = mListener.newSearch(c, v);
+            List<Whoosh> data = mListener.newSearch(t, v);
             WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
             frag.setWhooshList(data);
+<<<<<<< Updated upstream
             svm = ViewModelProviders.of(this).get(SharedViewModel.class);
             svm.select(data);
+=======
+//            svm = new ViewModelProvider(this).get(SharedViewModel.class);
+//            svm.select(data);
+>>>>>>> Stashed changes
         }
     }
 
@@ -119,6 +124,6 @@ public class DisplayFragment extends Fragment {
 
     public interface OnSearchListener {
         // TODO: Update argument type and name
-        List<Whoosh> newSearch(String col, int val);
+        List<Whoosh> newSearch(boolean team, int val);
     }
 }

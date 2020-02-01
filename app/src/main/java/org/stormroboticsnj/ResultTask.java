@@ -52,6 +52,7 @@ public class ResultTask extends AsyncTask<String, Integer, Boolean> {
                 w.setEPowerCell3(Integer.parseInt(whooshSub[14]));
                 w.setLocations(whooshSub[15]);
                 w.setEndgameOutcome(whooshSub[16]);
+                w.setDefenseSecs(Integer.parseInt(whooshSub[17]));
                 stormDao.insertWhooshes(w);
             }
 
