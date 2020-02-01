@@ -2,10 +2,6 @@ package org.stormroboticsnj.ui.display;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
@@ -95,7 +94,7 @@ public class DisplayFragment extends Fragment {
             List<Whoosh> data = mListener.newSearch(c, v);
             WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
             frag.setWhooshList(data);
-            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
+            svm = new ViewModelProvider(this).get(SharedViewModel.class);
             svm.select(data);
         }
     }
