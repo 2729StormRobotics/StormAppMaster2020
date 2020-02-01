@@ -1,8 +1,11 @@
 package org.stormroboticsnj.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -17,7 +20,7 @@ import java.util.List;
  */
 @Dao
 public interface StormDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertWhooshes(Whoosh whoosh);
 
     @Update
@@ -28,4 +31,18 @@ public interface StormDao {
 
     @Query("SELECT * FROM whooshes")
     public List<Whoosh> getAllWhooshes();
+
+    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal")
+    public List<Whoosh> filterWhooshes(String colName, int searchVal);
+
+    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal ORDER BY :sortColName")
+    public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName);
+
+    @Query("SELECT * FROM whooshes")
+    public Cursor getCursor();
+
+    @Query("SELECT * FROM whooshes ORDER BY team_num")
+    public List<Whoosh> getWhooshesByTeam();
+
+
 }
