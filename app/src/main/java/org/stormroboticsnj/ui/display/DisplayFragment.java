@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,14 +93,10 @@ public class DisplayFragment extends Fragment {
         if (mListener != null) {
             List<Whoosh> data = mListener.newSearch(t, v);
             WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
+            if (data.isEmpty()) Toast.makeText(getContext(), "No Matches Found", Toast.LENGTH_LONG).show();
             frag.setWhooshList(data);
-<<<<<<< Updated upstream
-            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
-            svm.select(data);
-=======
-//            svm = new ViewModelProvider(this).get(SharedViewModel.class);
+//            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
 //            svm.select(data);
->>>>>>> Stashed changes
         }
     }
 

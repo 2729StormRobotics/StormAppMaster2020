@@ -1,24 +1,27 @@
-package org.stormroboticsnj;
+package org.stormroboticsnj.ui;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
+import org.stormroboticsnj.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DatabaseTools.OnFragmentInteractionListener} interface
+ * {@link PrivacyFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DatabaseTools#newInstance} factory method to
+ * Use the {@link PrivacyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DatabaseTools extends Fragment {
+public class PrivacyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +33,7 @@ public class DatabaseTools extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public DatabaseTools() {
+    public PrivacyFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +43,11 @@ public class DatabaseTools extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DatabaseTools.
+     * @return A new instance of fragment PrivacyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DatabaseTools newInstance(String param1, String param2) {
-        DatabaseTools fragment = new DatabaseTools();
+    public static PrivacyFragment newInstance(String param1, String param2) {
+        PrivacyFragment fragment = new PrivacyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,29 +67,15 @@ public class DatabaseTools extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_privacy, container, false);
+    }
 
-        View v = inflater.inflate(R.layout.fragment_database_tools, container, false);
-
-        final Button dump = v.findViewById(R.id.btnDump);
-        final Button clean = v.findViewById(R.id.btnClear);
-
-        final MainActivity act = new MainActivity();
-
-        dump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        clean.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                act.clearDatabase();
-            }
-        });
-
-        return v; // Inflate the layout for this fragment
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
@@ -118,8 +107,6 @@ public class DatabaseTools extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void clearDatabase();
-        void dumpDatabase();
+        void onFragmentInteraction(Uri uri);
     }
-
 }

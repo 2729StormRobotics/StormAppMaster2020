@@ -1,16 +1,18 @@
 package org.stormroboticsnj;
 
-import android.content.DialogInterface;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteQueryBuilder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -19,10 +21,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
-import com.opencsv.*;
+import com.opencsv.CSVWriter;
 
 import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
+import org.stormroboticsnj.ui.DatabaseTools;
+import org.stormroboticsnj.ui.MapFragment;
 import org.stormroboticsnj.ui.display.DisplayFragment;
 import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
 import org.stormroboticsnj.ui.rank.RankFragment;
@@ -30,11 +34,16 @@ import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
-        RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener {
+        RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener,
+        MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
+    public static final int CAMERA_REQUEST_CODE = 1;
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
     private String[] colNames;
@@ -50,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_display, R.id.nav_rank)
+                R.id.nav_home, R.id.nav_scan, R.id.nav_display, R.id.nav_tools, R.id.nav_map, R.id.nav_privacy)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -63,16 +72,20 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
 
-        StormDao stormdao = db.stormDao();
-        Cursor cursor = stormdao.getCursor();
-        cursor.moveToFirst();
-        colNames = cursor.getColumnNames();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.containsKey("CameraPermission")) {
+            Toast.makeText(getApplicationContext(), "No Camera Permission", Toast.LENGTH_SHORT);
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+            }
+        }
 
     }
 
     public String[] getColNames() {
         return this.colNames;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,72 +122,56 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
 
     @Override
     public void clearDatabase() {
-        new AlertDialog.Builder(this) //confirm with user
-                .setTitle("Clear Data")
-                .setMessage("Are you sure you want to completely clear the local database? This action is permanent.")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //clear database table
-                        db.clearAllTables();
-                        Toast.makeText(getApplicationContext(), "Database cleared", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //do nothing
-                    }
-                })
-                .setIcon(R.mipmap.ic_launcher)
-                .show();
+        db.clearAllTables();
     }
 
     @Override
-    public void dumpDatabase() {
-        new android.app.AlertDialog.Builder(MainActivity.this)
-                .setTitle("Dump Database")
-                .setMessage("Dump the database to a CSV file on the device.  Are you sure?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dump();
-                        Toast.makeText(MainActivity.this, "Database Dumped", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .show();
-    }
-
-    private void dump() {
+    public String dumpDatabase() {
         File exportDir = new File(Environment.getDataDirectory(), "");
         if (!exportDir.exists()) {
             exportDir.mkdirs();
         }
 
-        File file = new File(exportDir, "stormexport" + ".csv");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
+        String dateTime = df.format(Calendar.getInstance().getTime());
+
+        File file = new File(exportDir, "scoutingradar-" + dateTime + ".csv");
         try {
             file.createNewFile();
             CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
             Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
             csvWrite.writeNext(curCSV.getColumnNames());
             while (curCSV.moveToNext()) {
-                //Which column you want to exprort
-                String arrStr[] = new String[curCSV.getColumnCount()];
+                //Which column you want to export
+                String[] arrStr = new String[curCSV.getColumnCount()];
                 for (int i = 0; i < curCSV.getColumnCount() - 1; i++)
                     arrStr[i] = curCSV.getString(i);
                 csvWrite.writeNext(arrStr);
             }
             csvWrite.close();
             curCSV.close();
-            Toast.makeText(getApplicationContext(), "Database Exported to csv", Toast.LENGTH_SHORT);
         } catch (Exception sqlEx) {
+            Log.d("MainActivity dump", sqlEx.toString());
+            return null;
+        }
+        return file.getName();
+    }
 
+    private void dump() {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        //mandatory implementation for MapFragment
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                Toast.makeText(getApplicationContext(), "Camera permission denied! Scanning will not work.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
