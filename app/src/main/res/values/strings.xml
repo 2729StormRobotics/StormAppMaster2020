@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Storm Scouting Radar Master</string>
+    <string name="app_name">Storm Scouting Radar 2020: Master</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Storm Scouting Radar Master</string>
-    <string name="nav_header_subtitle">Scouting Radar by Storm Robotics Team</string>
+    <string name="nav_header_title">Storm Scouting Radar 2020: Master</string>
+    <string name="nav_header_subtitle">Scouting Radar by Storm Robotics Team.</string>
     <string name="nav_header_subtwo">www.stormroboticsnj.org</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -25,7 +25,7 @@
     <string name="menu_home">Home</string>
     <string name="clear">Clear</string>
     <string name="dump">Dump</string>
-    <string name="storm_ir_logo">Storm IR Logo</string>
+    <string name="storm_ir_logo">Storm Infinite Recharge Background Logo</string>
     <string name="welcome_message">Welcome to the Scouting Radar master app! Swipe right to begin!</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
