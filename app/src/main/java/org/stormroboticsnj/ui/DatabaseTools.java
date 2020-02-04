@@ -119,12 +119,7 @@ public class DatabaseTools extends Fragment {
         dump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View s) {
-                if(mListener.dumpDatabase() != null)
-                    Toast.makeText(getActivity(), "Database exported to csv file", Toast.LENGTH_SHORT)
-                            .show();
-                else
-                    Toast.makeText(getActivity(), "Database dump failed", Toast.LENGTH_SHORT)
-                            .show();
+                mListener.dumpDatabase();
             }
         });
 
@@ -162,7 +157,7 @@ public class DatabaseTools extends Fragment {
         // TODO: Update argument type and name
         void clearDatabase();
 
-        String dumpDatabase();
+        void dumpDatabase();
     }
 
 }

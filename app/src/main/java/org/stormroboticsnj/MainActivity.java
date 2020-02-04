@@ -1,11 +1,13 @@
 package org.stormroboticsnj;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     public static final int CAMERA_REQUEST_CODE = 1;
+    public static final int DUMP_REQUEST_CODE = 2729;
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
     private String[] colNames;
@@ -126,39 +130,51 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     }
 
     @Override
-    public String dumpDatabase() {
-        File exportDir = new File(Environment.getDataDirectory(), "");
-        if (!exportDir.exists()) {
-            exportDir.mkdirs();
-        }
+    public void dumpDatabase() {
+        /* start by creating a file and letting Android ask the user where to put it */
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE); //let the file be openable and not prrivate
+        intent.setType("text/csv"); //MIME type
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
-        String dateTime = df.format(Calendar.getInstance().getTime());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss"); //set format for datetime
+        String dateTime = df.format(Calendar.getInstance().getTime()); //get datetime for filename
+        intent.putExtra(Intent.EXTRA_TITLE, "scoutingradar-" + dateTime + ".csv"); //set filename
 
-        File file = new File(exportDir, "scoutingradar-" + dateTime + ".csv");
-        try {
-            file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-            Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
-            csvWrite.writeNext(curCSV.getColumnNames());
-            while (curCSV.moveToNext()) {
-                //Which column you want to export
-                String[] arrStr = new String[curCSV.getColumnCount()];
-                for (int i = 0; i < curCSV.getColumnCount() - 1; i++)
-                    arrStr[i] = curCSV.getString(i);
-                csvWrite.writeNext(arrStr);
-            }
-            csvWrite.close();
-            curCSV.close();
-        } catch (Exception sqlEx) {
-            Log.d("MainActivity dump", sqlEx.toString());
-            return null;
-        }
-        return file.getName();
+        startActivityForResult(intent, DUMP_REQUEST_CODE); //we will handle the result in this activity, the request code identifies which request it is for the result handler method
     }
 
-    private void dump() {
 
+    /* this method will handle the result from the create file intent in dumpDatabase() */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == DUMP_REQUEST_CODE
+                && resultCode == Activity.RESULT_OK) { //make sure it's the right request and it was successful
+            //The result data contains a URI for the document or directory that the user selected.
+            Uri uri = null;
+            if (resultData != null) {
+                uri = resultData.getData();
+
+                /* use csvwriter to export database to the created csv file */
+                try {
+                    File file = new File(uri.toString()); //convert uri to string, use to create File
+                    CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+                    Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
+                    //make a custom query instead of using Dao so that we can get a Cursor instead of a List<Whoosh>
+                    csvWrite.writeNext(curCSV.getColumnNames());
+                    while (curCSV.moveToNext()) { //loops through table, making sure to stay in bounds (moveToNext goes to next row)
+                        String[] arrStr = new String[curCSV.getColumnCount()];
+                        for (int i = 0; i < curCSV.getColumnCount() - 1; i++) //combine all columns into String[]
+                            arrStr[i] = curCSV.getString(i);
+                        csvWrite.writeNext(arrStr); //make the String[] a row in the csv file
+                    }
+                    csvWrite.close(); //cleanup
+                    curCSV.close();
+                } catch (Exception sqlEx) { //lots of errors are possible here; android studio shows a warning even if the new File() isn't in a try-catch
+                    Log.d("MainActivity dump", sqlEx.toString());
+                }
+            }
+        }
     }
 
     @Override
@@ -167,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 Toast.makeText(getApplicationContext(), "Camera permission denied! Scanning will not work.", Toast.LENGTH_LONG).show();
