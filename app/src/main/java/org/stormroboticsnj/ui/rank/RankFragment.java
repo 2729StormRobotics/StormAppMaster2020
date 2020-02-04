@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import org.stormroboticsnj.MainActivity;
 import org.stormroboticsnj.R;
@@ -125,6 +123,10 @@ public class RankFragment extends Fragment {
     public void onButtonPressed(RankEnum rank) {
         if (mListener != null) {
             List<Whoosh> data = mListener.getAll();
+            if (!(data.size() > 0)){
+                Toast.makeText(getActivity(), "Databse is empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
             List<Team> teams = new ArrayList<>();
             if (data.size() > 1) {
 
@@ -228,6 +230,9 @@ public class RankFragment extends Fragment {
                     }
                 });
 
+            } else {
+                Team t = new Team();
+                t.setMatches(data);
             }
 
             TeamListFragment frag = (TeamListFragment) getChildFragmentManager().findFragmentById(R.id.frag2);
