@@ -1,13 +1,18 @@
-package org.stormroboticsnj;
+package org.stormroboticsnj.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import org.stormroboticsnj.R;
 
 
 /**
@@ -70,19 +75,51 @@ public class DatabaseTools extends Fragment {
         final Button dump = v.findViewById(R.id.btnDump);
         final Button clean = v.findViewById(R.id.btnClear);
 
-        final MainActivity act = new MainActivity();
-
-        dump.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         clean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                act.clearDatabase();
+                new AlertDialog.Builder(getActivity()) //confirm with user
+                        .setTitle("Clear Data")
+                        .setMessage("Are you sure you want to completely clear the local database? This action is permanent.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                new AlertDialog.Builder(getActivity()) //confirm with user
+                                        .setTitle("Confirm")
+                                        .setMessage("The local database will be permanently cleared.")
+                                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                //clear database table
+                                                mListener.clearDatabase();
+                                                Toast.makeText(getActivity(), "Database cleared", Toast.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                //do nothing
+                                            }
+                                        })
+                                        .setIcon(R.mipmap.ic_launcher)
+                                        .show();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        })
+                        .setIcon(R.mipmap.ic_launcher)
+                        .show();
+            }
+        });
+
+        dump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View s) {
+                mListener.dumpDatabase();
             }
         });
 
@@ -119,6 +156,7 @@ public class DatabaseTools extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void clearDatabase();
+
         void dumpDatabase();
     }
 

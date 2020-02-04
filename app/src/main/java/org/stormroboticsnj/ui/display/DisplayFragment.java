@@ -2,6 +2,7 @@ package org.stormroboticsnj.ui.display;
 
 import android.content.Context;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,6 @@ public class DisplayFragment extends Fragment {
 
        // final View testView = v.findViewById(R.id.frag1);
 
-
         final MainActivity act = (MainActivity) getActivity(); //this might throw exception if (getActivity() instanceOf MainActivity) is false
         final CharSequence[] colNames = {"team_num", "match_num"};
         final CharSequence[] displayNames = {"Team Number", "Match Number"};
@@ -75,27 +75,34 @@ public class DisplayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /*get field and search value, error if nonexistant */
-                if (searchBox.getText().equals("")) {
+                if (searchBox.getText().toString().equals("")) {
                     Toast t = new Toast(getContext());
                     t.setText("Please enter a value to search for");
                     t.show();
                     return;
                 }
                 int filterVal = Integer.parseInt(searchBox.getText().toString());
-                onButtonPressed(colNames[colSpinner.getSelectedItemPosition()].toString(), filterVal);
+                onButtonPressed(colSpinner.getSelectedItemPosition() == 0, filterVal);
             }
         });
         return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String c, int v) {
+    public void onButtonPressed(boolean t, int v) {
         if (mListener != null) {
-            List<Whoosh> data = mListener.newSearch(c, v);
+            List<Whoosh> data = mListener.newSearch(t, v);
             WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
+            if (data.isEmpty()) Toast.makeText(getContext(), "No Matches Found", Toast.LENGTH_LONG).show();
             frag.setWhooshList(data);
+          
+          //bad
+//            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
+//            svm.select(data);
+
             svm = new ViewModelProvider(this).get(SharedViewModel.class);
             svm.select(data);
+
         }
     }
 
@@ -118,6 +125,6 @@ public class DisplayFragment extends Fragment {
 
     public interface OnSearchListener {
         // TODO: Update argument type and name
-        List<Whoosh> newSearch(String col, int val);
+        List<Whoosh> newSearch(boolean team, int val);
     }
 }

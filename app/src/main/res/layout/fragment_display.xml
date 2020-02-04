@@ -45,7 +45,8 @@
         android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/btnSearch"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/number"/>
 
     <Spinner
         android:id="@+id/spinnerCols"

@@ -1,13 +1,18 @@
 package org.stormroboticsnj;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,9 +27,18 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //make sure we still have permission to use the camera
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(ScanActivity.this, MainActivity.class);
+            intent.putExtra("CameraPermission", 0);
+            startActivity(intent);
+        }
+
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);
-        List<BarcodeFormat> formats = Collections.singletonList(BarcodeFormat.QR_CODE);
+        List<BarcodeFormat> formats = new ArrayList<>();
+        formats.add(BarcodeFormat.QR_CODE);
         mScannerView.setFormats(formats);
 
         db = Room.databaseBuilder(getApplicationContext(),
@@ -49,7 +63,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void handleResult(final Result rawResult) {
         ResultTask rt = new ResultTask(db, getApplicationContext());
         rt.execute(rawResult.toString());
-        onBackPressed();
+        Intent intent = new Intent(ScanActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
 
