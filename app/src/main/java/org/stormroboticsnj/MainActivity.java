@@ -7,8 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.util.Log;
+import android.os.ParcelFileDescriptor;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -34,9 +33,8 @@ import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
 import org.stormroboticsnj.ui.rank.RankFragment;
 import org.stormroboticsnj.ui.rank.team.TeamListFragment;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.net.URI;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -154,13 +152,20 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
-
-                /* use csvwriter to export database to the created csv file */
+                /* create an outputstream using the uri in order to write to it */
+                /* this code is taken from the docs, it seems unnecessarily complicated but it will do
+                   for now. https://developer.android.com/training/data-storage/shared/documents-files
+                */
                 try {
-                    File file = new File(uri.toString()); //convert uri to string, use to create File
-                    CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-                    Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
+                    ParcelFileDescriptor pfd = getContentResolver().openFileDescriptor(uri, "w");
+                    FileOutputStream fileOutputStream = new FileOutputStream(pfd.getFileDescriptor());
+
+                    //the csv writing code from here to fileOutputStream.close() is not from the docs (it's a *little* more original)
+                    OutputStreamWriter osr = new OutputStreamWriter(fileOutputStream);
+                    CSVWriter csvWrite = new CSVWriter(osr);
                     //make a custom query instead of using Dao so that we can get a Cursor instead of a List<Whoosh>
+                    Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
+
                     csvWrite.writeNext(curCSV.getColumnNames());
                     while (curCSV.moveToNext()) { //loops through table, making sure to stay in bounds (moveToNext goes to next row)
                         String[] arrStr = new String[curCSV.getColumnCount()];
@@ -170,8 +175,13 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                     }
                     csvWrite.close(); //cleanup
                     curCSV.close();
-                } catch (Exception sqlEx) { //lots of errors are possible here; android studio shows a warning even if the new File() isn't in a try-catch
-                    Log.d("MainActivity dump", sqlEx.toString());
+
+                    fileOutputStream.close();
+                    pfd.close();
+                } catch (Exception e) {
+                    /*just catch everything because filewriting leads to lots of exceptions,
+                        but the most common one will be IOException */
+                    e.printStackTrace();
                 }
             }
         }

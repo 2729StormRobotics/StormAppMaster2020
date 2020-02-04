@@ -63,7 +63,6 @@ public class DisplayFragment extends Fragment {
 
        // final View testView = v.findViewById(R.id.frag1);
 
-
         final MainActivity act = (MainActivity) getActivity(); //this might throw exception if (getActivity() instanceOf MainActivity) is false
         final CharSequence[] colNames = {"team_num", "match_num"};
         final CharSequence[] displayNames = {"Team Number", "Match Number"};
@@ -75,7 +74,7 @@ public class DisplayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /*get field and search value, error if nonexistant */
-                if (searchBox.getText().equals("")) {
+                if (searchBox.getText().toString().equals("")) {
                     Toast t = new Toast(getContext());
                     t.setText("Please enter a value to search for");
                     t.show();
