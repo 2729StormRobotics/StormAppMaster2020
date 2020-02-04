@@ -41,8 +41,8 @@
         android:id="@+id/rankSpinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/frag2"
-        app:layout_constraintEnd_toEndOf="@+id/btnRank"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRank"
+        app:layout_constraintEnd_toStartOf="@+id/btnRank"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

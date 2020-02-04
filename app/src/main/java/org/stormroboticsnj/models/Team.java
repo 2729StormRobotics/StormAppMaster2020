@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Team {
 
     private int team;
-    private List<Whoosh> matches;
+    private List<Whoosh> matches = new ArrayList<>();
 
     public int getTeam() {
         return team;

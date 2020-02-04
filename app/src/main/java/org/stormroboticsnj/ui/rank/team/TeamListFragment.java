@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.stormroboticsnj.R;
 import org.stormroboticsnj.models.Team;
 import org.stormroboticsnj.models.Whoosh;
-import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.display.SharedViewModel;
-import org.stormroboticsnj.ui.rank.team.MyTeamRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +70,7 @@ public class TeamListFragment extends Fragment {
         /* MainActivity act = (MainActivity) getActivity();
         teamList = act.getData("team_num", 2729); */
         //teamList = mListener.newSearchWL("team_num", 2729);
-        //FOR TESTING PURPOSES ONLY, A BUNCH OF DEFAULT DATA
-        for(int i =0; i < 10; ++i) {
-            Team w = new Team();
-            teamList.add(w);
-        }
+
         adapter = new MyTeamRecyclerViewAdapter(teamList, mListener);
 
         // Set the adapter
