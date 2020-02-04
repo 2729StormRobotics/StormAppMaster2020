@@ -28,6 +28,7 @@ import org.stormroboticsnj.dao.StormDao;
 import org.stormroboticsnj.models.Whoosh;
 import org.stormroboticsnj.ui.DatabaseTools;
 import org.stormroboticsnj.ui.MapFragment;
+import org.stormroboticsnj.ui.PrivacyFragment;
 import org.stormroboticsnj.ui.display.DisplayFragment;
 import org.stormroboticsnj.ui.display.whoosh.WhooshListFragment;
 import org.stormroboticsnj.ui.rank.RankFragment;
@@ -42,7 +43,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
         RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener,
-        MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback {
+        MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback, PrivacyFragment.OnFragmentInteractionListener {
 
     public static final int CAMERA_REQUEST_CODE = 1;
     public static final int DUMP_REQUEST_CODE = 2729;
