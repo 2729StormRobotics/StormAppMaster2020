@@ -5,10 +5,10 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.display.DisplayFragment"
-    android:background="#E8E8E8">
+    android:background="#E8E8E8"
+    tools:context=".ui.display.DisplayFragment">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag1"
         android:name="org.stormroboticsnj.ui.display.whoosh.WhooshListFragment"
         android:layout_width="wrap_content"
@@ -18,15 +18,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
         tools:layout="@layout/fragment_whoosh_list" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="105dp" />
 
     <Button
         android:id="@+id/btnSearch"
@@ -39,21 +32,28 @@
 
     <EditText
         android:id="@+id/txtVal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="15"
+        android:hint="@string/number"
         android:importantForAutofill="no"
         android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSearch"
         app:layout_constraintEnd_toStartOf="@+id/btnSearch"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/number"/>
+        app:layout_constraintStart_toEndOf="@+id/spinnerCols"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCols"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtVal"
-        app:layout_constraintEnd_toStartOf="@+id/txtVal"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
 </androidx.constraintlayout.widget.ConstraintLayout>
