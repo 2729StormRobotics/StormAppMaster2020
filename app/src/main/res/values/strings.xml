@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Storm Scouting Radar 2020: Master</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Storm Scouting Radar 2020: Master</string>
+    <string name="nav_header_subtitle">Scouting Radar by Storm Robotics Team.</string>
+    <string name="nav_header_subtwo">www.stormroboticsnj.org</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="button">Button</string>
+    <string name="name">Name</string>
+    <string name="match"> Match </string>
+    <string name="team_num_placeholder">2729</string>
+    <string name="search">Search</string>
+
+    <string name="scan">Scan</string>
+    <string name="power_cells_scored">POWER CELLS SCORED</string>
+    <string name="menu_lookup">Lookup</string>
+    <string name="menu_tools">Database Tools</string>
+    <string name="menu_rank">Rank Teams</string>
+    <string name="rank">Rank</string>
+    <string name="menu_scan">Scan</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="menu_home">Home</string>
+    <string name="clear">Clear</string>
+    <string name="dump">Dump</string>
+    <string name="storm_ir_logo">Storm Infinite Recharge Background Logo</string>
+    <string name="welcome_message">Welcome to the Scouting Radar master app! Swipe right to begin!</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_map">Map</string>
+    <string name="number">Number</string>
+    <string name="menu_privacy">Privacy</string>
+
+    <string name="privacy_policy">Privacy Policy available at https://docs.google.com/document/d/1qYCvt0eGiPle1d9VVWu7vAZr5h4CDdzS16_cOC7WbFw</string>
+
+</resources>

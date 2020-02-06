@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.stormroboticsnj.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <activity
+        android:id="@+id/nav_scan"
+        android:name="org.stormroboticsnj.ScanActivity"
+        android:label="@string/menu_scan" />
+
+    <fragment
+        android:id="@+id/nav_display"
+        android:name="org.stormroboticsnj.ui.display.DisplayFragment"
+        android:label="@string/menu_lookup"
+        tools:layout="@layout/fragment_display"/>
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="org.stormroboticsnj.ui.DatabaseTools"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_database_tools" />
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="org.stormroboticsnj.ui.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/nav_privacy"
+        android:name="org.stormroboticsnj.ui.PrivacyFragment"
+        android:label="Privacy" />
+
+
+
+
+</navigation>
