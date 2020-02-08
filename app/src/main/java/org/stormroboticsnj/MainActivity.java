@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
 
     }
 
-    public String[] getColNames() {
+    public String[] getColNames() { // Get the column names of the data
         return this.colNames;
     }
 
@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     *
+     * @param col: Column of
+     * @param val
+     * @return
+     */
     @Override
     public List<Whoosh> newSearchWL(String col, int val) {
         StormDao stormDao = db.stormDao();

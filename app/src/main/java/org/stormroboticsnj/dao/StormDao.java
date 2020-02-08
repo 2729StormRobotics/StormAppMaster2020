@@ -21,28 +21,28 @@ import java.util.List;
 @Dao
 public interface StormDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertWhooshes(Whoosh whoosh);
-
+    public void insertWhooshes(Whoosh whoosh);  // Insert the annotated parameters into the whoosh database, delete duplicates
+                                                // The parameters are those of the abstract method, provided by Room as core insert parameters
     @Update
-    public void updateWhooshes(Whoosh whoosh);
+    public void updateWhooshes(Whoosh whoosh); // Update the parameters in the database if they already exist
 
     @Delete
-    public void deleteWhooshes(Whoosh whoosh);
+    public void deleteWhooshes(Whoosh whoosh); // Delete the parameters from the databases
 
     @Query("SELECT * FROM whooshes")
-    public List<Whoosh> getAllWhooshes();
+    public List<Whoosh> getAllWhooshes(); // Query, or inquiry, as method to access all Whoosh databases
 
     @Query("SELECT * FROM whooshes WHERE :colName=:searchVal")
-    public List<Whoosh> filterWhooshes(String colName, int searchVal);
+    public List<Whoosh> filterWhooshes(String colName, int searchVal); // Query as method to filter data results by column and search value, useful for lookup
 
     @Query("SELECT * FROM whooshes WHERE :colName=:searchVal ORDER BY :sortColName")
-    public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName);
+    public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName); // Query as method to filter data results by column, search value, sorting column, useful for lookup and ranking
 
     @Query("SELECT * FROM whooshes")
-    public Cursor getCursor();
+    public Cursor getCursor(); // Access the cursor for database export
 
     @Query("SELECT * FROM whooshes ORDER BY team_num")
-    public List<Whoosh> getWhooshesByTeam();
+    public List<Whoosh> getWhooshesByTeam(); // Useful for team lookup, search for whooshes by particular team
 
 
 }
