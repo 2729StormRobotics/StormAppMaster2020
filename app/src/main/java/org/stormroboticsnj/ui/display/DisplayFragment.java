@@ -76,7 +76,7 @@ public class DisplayFragment extends Fragment {
             public void onClick(View view) {
                 /*get field and search value, error if nonexistant */
                 if (searchBox.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "You must enter a value", Toast.LENGTH_LONG);
+                    Toast.makeText(getContext(), "Enter a Number", Toast.LENGTH_LONG).show();
                     return;
                 }
                 int filterVal = Integer.parseInt(searchBox.getText().toString());
