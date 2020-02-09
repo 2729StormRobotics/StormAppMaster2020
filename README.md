@@ -9,4 +9,11 @@ For a full guide on the features of this app and how to use it, along with our c
 
 Our privacy policy for this app is available in [this document](https://drive.google.com/open?id=1qYCvt0eGiPle1d9VVWu7vAZr5h4CDdzS16_cOC7WbFw).  
 
-## Build
+## Building this project
+If you would like to build this project yourself instead of downloading it from the play store, follow these instructions:  
+
+_Instructions_  
+
+---
+
+Scouting Radar by Storm Robotics Team. [stormroboticsnj.org](stormroboticsnj.org)
