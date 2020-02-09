@@ -1,5 +1,5 @@
 # StormAppMaster2020
-![Storm Banner Logo](images/bannerlogo.jpg)  
+![Scouting Radar Banner Logo](images/bannerlogo.jpg)  
 
 This is the project for __Storm Scouting Radar 2020: Master__, a scouting app for FRC developed by Storm Robotics (FRC 2729).  
 ## Information
@@ -16,4 +16,6 @@ _Instructions_
 
 ---
 
-Scouting Radar by Storm Robotics Team. [stormroboticsnj.org](stormroboticsnj.org)
+<p align="center">Scouting Radar by Storm Robotics Team. <a href="stormroboticsnj.org">stormroboticsnj.org</a>  </p>  
+
+<p align="center"><img src="images/stormlogo.png" alt="Storm Logo"></p>
