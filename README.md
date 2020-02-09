@@ -18,4 +18,4 @@ _Instructions_
 
 <p align="center">Scouting Radar by Storm Robotics Team. <a href="stormroboticsnj.org">stormroboticsnj.org</a>  </p>  
 
-<p align="center"><img src="images/stormlogo.png" alt="Storm Logo"></p>
+<p align="center"><img src="images/stormlogosmall.png" alt="Storm Logo"></p>
