@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
 
     /**
      *
-     * @param col: Column of
+     * @param col
      * @param val
      * @return
      */
