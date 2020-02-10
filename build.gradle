@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         google()
@@ -14,14 +13,29 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.sonarqube" version "2.8"
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "2729StormRobotics_StormAppMaster2020"
+        property "sonar.organization", "storm-robotics-2729-github"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.links.homepage", "https://play.google.com/store/apps/details?id=org.stormroboticsnj"
+        property "sonar.links.scm", "https://github.com/2729StormRobotics/StormAppMaster2020"
+        property "sonar.links.issue", "https://github.com/2729StormRobotics/StormAppMaster2020/issues"
+    }
 }
