@@ -23,10 +23,21 @@
         tools:layout="@layout/fragment_display"/>
 
     <fragment
-        android:id="@+id/nav_rank"
-        android:name="org.stormroboticsnj.ui.rank.RankFragment"
-        android:label="@string/menu_rank"
-        tools:layout="@layout/fragment_rank" />
+        android:id="@+id/nav_tools"
+        android:name="org.stormroboticsnj.ui.DatabaseTools"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_database_tools" />
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="org.stormroboticsnj.ui.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/nav_privacy"
+        android:name="org.stormroboticsnj.ui.PrivacyFragment"
+        android:label="Privacy" />
 
 
 

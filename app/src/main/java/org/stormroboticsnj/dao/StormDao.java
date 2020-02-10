@@ -35,14 +35,13 @@ public interface StormDao {
     @Query("SELECT * FROM whooshes WHERE :colName=:searchVal")
     public List<Whoosh> filterWhooshes(String colName, int searchVal); // Query as method to filter data results by column and search value, useful for lookup
 
-    @Query("SELECT * FROM whooshes WHERE :colName=:searchVal ORDER BY :sortColName")
-    public List<Whoosh> filterWhooshes(String colName, int searchVal, String sortColName); // Query as method to filter data results by column, search value, sorting column, useful for lookup and ranking
+    @Query("SELECT * FROM whooshes WHERE team_num=:teamNum")
+    public List<Whoosh> getByTeamNumber(int teamNum);
 
-    @Query("SELECT * FROM whooshes")
-    public Cursor getCursor(); // Access the cursor for database export
+    @Query("SELECT * FROM whooshes WHERE match_num=:matchNum")
+    public List<Whoosh> getByMatchNumber(int matchNum);
 
-    @Query("SELECT * FROM whooshes ORDER BY team_num")
-    public List<Whoosh> getWhooshesByTeam(); // Useful for team lookup, search for whooshes by particular team
+
 
 
 }

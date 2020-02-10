@@ -11,4 +11,5 @@
     <color name="darkOrange">#CC5200</color>
     <color name="lightRed">#FF4D4D</color>
     <color name="lightOrange">#FF944D</color>
+    <color name="black">#222222</color>
 </resources>
