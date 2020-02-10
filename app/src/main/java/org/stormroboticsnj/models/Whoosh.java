@@ -54,8 +54,8 @@ public class Whoosh {
 
     /**
      * Whoosh class constructor
-     * @param t: team number
-     * @param m: match number
+     * @param t team number
+     * @param m match number
      */
     public Whoosh(int t, int m) {
         team = t;
