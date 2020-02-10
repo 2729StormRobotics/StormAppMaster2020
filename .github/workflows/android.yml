@@ -20,8 +20,11 @@ jobs:
       with:
         java-version: 1.8
     - name: Gradle Build
-      run: |
-        chmod +x ./gradlew
-        ./gradlew build --exclude-task test
+      run: ./gradlew build --exclude-task test
     - name: Gradle Test
       run: ./gradlew test
+    - name: Sonarcloud Scan
+      run: ./gradlew sonarqube
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_FOR_SONAR }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
