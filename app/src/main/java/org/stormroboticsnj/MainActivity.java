@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public List<Whoosh> getAll() {
         StormDao stormDao = db.stormDao();
-        return stormDao.getWhooshesByTeam();
+        return stormDao.getAllWhooshes();
     }
 
     @Override
