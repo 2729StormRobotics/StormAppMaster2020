@@ -30,6 +30,12 @@ If you would like to build this project yourself instead of downloading it from 
 
 _Instructions_  
 
+```sh
+./gradlew assembleDebug
+```
+
+Alternatively, you can open the repository in [Android Studio](https://developer.android.com/studio/).
+
 ---
 
 <p align="center">Scouting Radar by Storm Robotics Team. <a href="stormroboticsnj.org">stormroboticsnj.org</a>  </p>  
