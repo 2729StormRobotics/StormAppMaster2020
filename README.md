@@ -1,4 +1,4 @@
-# StormAppMaster2020
+# Storm Scouting Radar 2020: Master
 
 ![Scouting Radar Banner Logo](images/bannerlogo.jpg)
 
