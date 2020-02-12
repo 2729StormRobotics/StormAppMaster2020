@@ -11,33 +11,35 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="org.stormroboticsnj.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+    <activity
+        android:id="@+id/nav_scan"
+        android:name="org.stormroboticsnj.ScanActivity"
+        android:label="@string/menu_scan" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="org.stormroboticsnj.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_display"
+        android:name="org.stormroboticsnj.ui.display.DisplayFragment"
+        android:label="@string/menu_lookup"
+        tools:layout="@layout/fragment_display"/>
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="org.stormroboticsnj.ui.tools.ToolsFragment"
+        android:name="org.stormroboticsnj.ui.DatabaseTools"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_database_tools" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="org.stormroboticsnj.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_map"
+        android:name="org.stormroboticsnj.ui.MapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="org.stormroboticsnj.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_privacy"
+        android:name="org.stormroboticsnj.ui.PrivacyFragment"
+        android:label="Privacy" />
+
+
+
+
 </navigation>

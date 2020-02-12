@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
+//import com.jjoe64.graphview.GraphView;
+//import com.jjoe64.graphview.series.DataPoint;
+//import com.jjoe64.graphview.series.LineGraphSeries;
 
 
 /**
@@ -72,7 +72,7 @@ public class TeamDataGraph extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_team_data_graph, container, false);
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
+       /* GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
@@ -80,7 +80,7 @@ public class TeamDataGraph extends Fragment {
                 new DataPoint(3, 2),
                 new DataPoint(4, 6)
         });
-        graph.addSeries(series);
+        graph.addSeries(series);*/
 
         // Inflate the layout for this fragment
         return view;

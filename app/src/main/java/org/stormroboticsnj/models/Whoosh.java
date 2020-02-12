@@ -3,7 +3,6 @@ package org.stormroboticsnj.models;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 /**
  * This class is a blueprint for a Whoosh object, which will be the future name of what was once
@@ -55,18 +54,41 @@ public class Whoosh {
 
     /**
      * Whoosh class constructor
-     * @param t: team number
-     * @param m: match number
+     * @param t team number
+     * @param m match number
      */
     public Whoosh(int t, int m) {
         team = t;
         match = m;
     }
+    //probably just for testing purposes
+    public Whoosh(int team, int match, boolean alliance, int aPowerCell1, int aPowerCell2, int aPowerCell3, int aPowerCellPickup, int tPowerCell1,
+                  int tPowerCell2, int tPowerCell3, boolean rotationControl, boolean positionControl, int ePowerCell1, int ePowerCell2,
+                  int ePowerCell3, String hang, String locations, int defense) {
+        this.team = team;
+        this.match = match;
+        this.alliance = alliance;
+        this.aPowerCell1 = aPowerCell1;
+        this.aPowerCell2 = aPowerCell2;
+        this.aPowerCell3 = aPowerCell3;
+        this.aPowerCellPickup = aPowerCellPickup;
+        this.tPowerCell1 = tPowerCell1;
+        this.tPowerCell2 = tPowerCell2;
+        this.tPowerCell3 = tPowerCell3;
+        this.rotationControl = rotationControl;
+        this.positionControl = positionControl;
+        this.ePowerCell1 = ePowerCell1;
+        this.ePowerCell2 = ePowerCell2;
+        this.ePowerCell3 = ePowerCell3;
+        this.endgameOutcome = hang;
+        this.locations = locations;
+        this.defenseSecs = defense;
+    }
 
-    /**
-     * Whoosh blank constructor
-     */
-    public Whoosh(){}
+
+    public Whoosh() {
+    }
+
 
     public int getTeam() { // Return team number
         return team;
@@ -246,7 +268,7 @@ public class Whoosh {
     @NonNull
     @Override
     public String toString() {
-        return          team
+        return team
                 + "," + match
                 + "," + (alliance ? "r" : "b")
                 + "," + aPowerCell1
