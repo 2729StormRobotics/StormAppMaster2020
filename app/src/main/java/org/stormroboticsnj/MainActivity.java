@@ -77,10 +77,12 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.containsKey("CameraPermission")) {
-            Toast.makeText(getApplicationContext(), "No Camera Permission", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "No Camera Permission", Toast.LENGTH_SHORT).show();
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+                //Asynchronously provide the user with more information
             }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+
         }
 
     }
