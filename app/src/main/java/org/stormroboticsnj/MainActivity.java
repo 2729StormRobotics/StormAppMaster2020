@@ -43,9 +43,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
         RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener,
-        MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback, PrivacyFragment.OnFragmentInteractionListener {
+        MapFragment.OnFragmentInteractionListener, PrivacyFragment.OnFragmentInteractionListener {
 
-    public static final int CAMERA_REQUEST_CODE = 1;
     public static final int DUMP_REQUEST_CODE = 2729;
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
@@ -74,16 +73,6 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         within onCreate. */
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null && bundle.containsKey("CameraPermission")) {
-            Toast.makeText(getApplicationContext(), "No Camera Permission", Toast.LENGTH_SHORT).show();
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                //Asynchronously provide the user with more information
-            }
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
-
-        }
 
     }
 
@@ -193,15 +182,5 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public void onFragmentInteraction(Uri uri) {
         //mandatory implementation for MapFragment
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(getApplicationContext(), "Camera permission denied! Scanning will not work.", Toast.LENGTH_LONG).show();
-            }
-        }
     }
 }
