@@ -33,7 +33,7 @@ dependencies {
     def lifecycle_version = "2.2.0"
     def savedstate_version = "1.0.0"
     def arch_version = "2.1.0"
-    def fragment_version = "1.2.0"
+    def fragment_version = "1.2.1"
     def room_version = "2.2.3"
     def permissions_version = "4.6.0"
 
