@@ -12,6 +12,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled true
             shrinkResources true
