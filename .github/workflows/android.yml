@@ -18,12 +18,13 @@ jobs:
       run: ./gradlew test
     - name: Start Android Emulator
       run: |
-        sdkmanager "system-images;android-29;google_apis;x86"
-        sdkmanager "build-tools;29.0.3"
-        echo "y" | sdkmanager --update
-        echo no | avdmanager create avd --force --name test --abi "google_apis/x86" --package "system-images;android-29;google_apis;x86" --device "Nexus 5X"
+        "$ANDROID_HOME"/tools/bin/sdkmanager --install emulator
+        "$ANDROID_HOME"/tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
+        "$ANDROID_HOME"/tools/bin/sdkmanager "build-tools;29.0.3"
+        echo "y" | "$ANDROID_HOME"/tools/bin/sdkmanager --update
+        echo no | "$ANDROID_HOME"/tools/bin/avdmanager create avd --force --name test --abi "google_apis/x86" --package "system-images;android-29;google_apis;x86" --device "Nexus 5X"
         "$ANDROID_HOME"/emulator/emulator -avd test -no-window -no-snapshot -noaudio -no-boot-anim > /dev/null 2>&1 &
-        adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
+        "$ANDROID_HOME"/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 5; done; input keyevent 82'
         "$ANDROID_HOME"/platform-tools/adb shell settings put global window_animation_scale 0.0
         "$ANDROID_HOME"/platform-tools/adb shell settings put global transition_animation_scale 0.0
         "$ANDROID_HOME"/platform-tools/adb shell settings put global animator_duration_scale 0.0
