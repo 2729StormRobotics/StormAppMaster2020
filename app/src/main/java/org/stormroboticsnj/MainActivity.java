@@ -1,19 +1,15 @@
 package org.stormroboticsnj;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.Menu;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -104,8 +100,11 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public List<Whoosh> newSearch(boolean team, int val) {
         StormDao stormDao = db.stormDao();
-        if (team) return stormDao.getByTeamNumber(val);
-        else return stormDao.getByMatchNumber(val);
+        if (team) {
+            return stormDao.getByTeamNumber(val);
+        } else {
+            return stormDao.getByMatchNumber(val);
+        }
     }
 
     @Override
@@ -162,7 +161,9 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                     while (curCSV.moveToNext()) { //loops through table, making sure to stay in bounds (moveToNext goes to next row)
                         String[] arrStr = new String[curCSV.getColumnCount()];
                         for (int i = 0; i < curCSV.getColumnCount() - 1; i++) //combine all columns into String[]
+                        {
                             arrStr[i] = curCSV.getString(i);
+                        }
                         csvWrite.writeNext(arrStr); //make the String[] a row in the csv file
                     }
                     csvWrite.close(); //cleanup

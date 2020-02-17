@@ -3,20 +3,17 @@ package org.stormroboticsnj;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -55,13 +52,13 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void showRationaleForCamera(final PermissionRequest request) {
         new AlertDialog.Builder(this)
                 .setMessage("The camera is needed to scan the QR codes from the User App")
-                .setPositiveButton("Okay", new AlertDialog.OnClickListener(){
+                .setPositiveButton("Okay", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("Deny", new AlertDialog.OnClickListener(){
+                .setNegativeButton("Deny", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         request.cancel();
@@ -74,7 +71,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void showDeniedForCamera() {
         new AlertDialog.Builder(this)
                 .setMessage("Camera permission denied. Scan QR will not function.")
-                .setNeutralButton("Okay", new AlertDialog.OnClickListener(){
+                .setNeutralButton("Okay", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -87,7 +84,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     void showNeverAskForCamera() {
         new AlertDialog.Builder(this)
                 .setMessage("Camera permission permanently denied. Scan QR will not function. Please change this in settings.")
-                .setNeutralButton("Okay", new AlertDialog.OnClickListener(){
+                .setNeutralButton("Okay", new AlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

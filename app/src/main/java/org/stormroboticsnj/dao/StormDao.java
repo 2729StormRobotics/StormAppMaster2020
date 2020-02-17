@@ -48,6 +48,4 @@ public interface StormDao {
     public List<Whoosh> getWhooshesByTeam();
 
 
-
-
 }
