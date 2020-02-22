@@ -115,16 +115,19 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
             case "P":
                 holder.mParkView.setTextColor(Color.parseColor("#000000"));
                 holder.mParkView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mParkView.setText(String.format(Locale.US, "Park %ds", w.getClimbSecs()));
                 break;
             case "H":
                 holder.mHangView.setTextColor(Color.parseColor("#000000"));
                 holder.mHangView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mHangView.setText(String.format(Locale.US, "Hang %ds", w.getClimbSecs()));
                 break;
             case "L":
                 holder.mHangView.setTextColor(Color.parseColor("#000000"));
                 holder.mHangView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
                 holder.mLevelView.setTextColor(Color.parseColor("#000000"));
                 holder.mLevelView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mHangView.setText(String.format(Locale.US, "Hang %ds", w.getClimbSecs()));
                 break;
             default:
                 //did not participate

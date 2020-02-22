@@ -36,6 +36,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
         RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener,
@@ -155,19 +156,16 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                     OutputStreamWriter osr = new OutputStreamWriter(fileOutputStream);
                     CSVWriter csvWrite = new CSVWriter(osr);
                     //make a custom query instead of using Dao so that we can get a Cursor instead of a List<Whoosh>
-                    Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
+                    StormDao stormDao = db.stormDao();
+                    List<Whoosh> allWhooshes = stormDao.getAllWhooshes();
 
-                    csvWrite.writeNext(curCSV.getColumnNames());
-                    while (curCSV.moveToNext()) { //loops through table, making sure to stay in bounds (moveToNext goes to next row)
-                        String[] arrStr = new String[curCSV.getColumnCount()];
-                        for (int i = 0; i < curCSV.getColumnCount() - 1; i++) //combine all columns into String[]
-                        {
-                            arrStr[i] = curCSV.getString(i);
-                        }
-                        csvWrite.writeNext(arrStr); //make the String[] a row in the csv file
+                    csvWrite.writeNext(Whoosh.getColumnNames());
+                    for (Whoosh w : allWhooshes) {
+                        String wString = w.toString();
+                        wString = wString.substring(0, wString.length() - 1);
+                        csvWrite.writeNext(wString.split(Pattern.quote(",")));
                     }
                     csvWrite.close(); //cleanup
-                    curCSV.close();
 
                     fileOutputStream.close();
                     pfd.close();

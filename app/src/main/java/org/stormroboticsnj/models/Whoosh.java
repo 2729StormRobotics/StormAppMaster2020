@@ -51,6 +51,8 @@ public class Whoosh {
     private String locations; // Private String variable for robot map scoring locations
     @ColumnInfo(name = "defenseSecs") // Column for robot total defense time
     private int defenseSecs; // Private integer variable for robot total defense time
+    @ColumnInfo(name="climbSecs")
+    private int climbSecs;
     public int getClimbSecs() {
         return climbSecs;
     }
@@ -59,8 +61,7 @@ public class Whoosh {
         this.climbSecs = climbSecs;
     }
 
-    @ColumnInfo(name="climbSecs")
-    private int climbSecs;
+
 
     /**
      * Whoosh class constructor
@@ -71,6 +72,30 @@ public class Whoosh {
     public Whoosh(int t, int m) {
         team = t;
         match = m;
+    }
+
+    public static String[] getColumnNames() {
+        return new String[]{
+                "Team Number",
+                "Match Number",
+                "Alliance",
+                "Bottom Port Auto",
+                "Outer Port Auto",
+                "Inner Port Auto",
+                "PC Pickup Auto",
+                "Bottom Port Tele",
+                "Outer Port Tele",
+                "Inner Port Tele",
+                "Rotation Control",
+                "Position Control",
+                "Bottom Port Endgame",
+                "Outer Port Endgame",
+                "Inner Port Endgame",
+                "Scoring Locations",
+                "Endgame Outcome",
+                "Defense Second",
+                "Climb Seconds"
+        };
     }
 
     //probably just for testing purposes
