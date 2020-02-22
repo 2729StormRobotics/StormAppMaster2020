@@ -51,6 +51,16 @@ public class Whoosh {
     private String locations; // Private String variable for robot map scoring locations
     @ColumnInfo(name = "defenseSecs") // Column for robot total defense time
     private int defenseSecs; // Private integer variable for robot total defense time
+    public int getClimbSecs() {
+        return climbSecs;
+    }
+
+    public void setClimbSecs(int climbSecs) {
+        this.climbSecs = climbSecs;
+    }
+
+    @ColumnInfo(name="climbSecs")
+    private int climbSecs;
 
     /**
      * Whoosh class constructor
@@ -269,23 +279,25 @@ public class Whoosh {
     @NonNull
     @Override
     public String toString() {
-        return team
-                + "," + match
-                + "," + (alliance ? "r" : "b")
-                + "," + aPowerCell1
-                + "," + aPowerCell2
-                + "," + aPowerCell3
-                + "," + aPowerCellPickup
-                + "," + tPowerCell1
-                + "," + tPowerCell2
-                + "," + tPowerCell3
-                + "," + (rotationControl ? "y" : "n")
-                + "," + (positionControl ? "y" : "n")
-                + "," + ePowerCell1
-                + "," + ePowerCell2
-                + "," + ePowerCell3
-                + "," + locations
-                + "," + endgameOutcome
+        return          team //0
+                + "," + match //1
+                + "," + (alliance ? "r" : "b") //2
+                + "," + aPowerCell1 //3
+                + "," + aPowerCell2 //4
+                + "," + aPowerCell3 //5
+                + "," + aPowerCellPickup //6
+                + "," + tPowerCell1 //7
+                + "," + tPowerCell2 //8
+                + "," + tPowerCell3 //9
+                + "," + (rotationControl ? "y" : "n") //10
+                + "," + (positionControl ? "y" : "n") //11
+                + "," + ePowerCell1 //12
+                + "," + ePowerCell2 //13
+                + "," + ePowerCell3 //14
+                + "," + locations //15
+                + "," + endgameOutcome //16
+                + "," + defenseSecs //17
+                + "," + climbSecs //18
                 + "|";
     }
 }
