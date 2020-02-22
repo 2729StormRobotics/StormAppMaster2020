@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -38,8 +37,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         List<BarcodeFormat> formats = new ArrayList<>();
         formats.add(BarcodeFormat.QR_CODE);
         mScannerView.setFormats(formats);
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
+        db = AppDatabase.getDatabase(getApplicationContext());
         ScanActivityPermissionsDispatcher.showCameraWithPermissionCheck(this);
     }
 

@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         /* get database, or build if it doesn't exist. This exact line must be included in the onCreate
         method of every Activity that uses the database. db can be a class-wide variable or local
         within onCreate. */
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
-
+        db = AppDatabase.getDatabase(getApplicationContext());
     }
 
     public String[] getColNames() {
