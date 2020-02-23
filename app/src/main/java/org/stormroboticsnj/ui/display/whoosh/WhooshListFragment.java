@@ -56,6 +56,7 @@ public class WhooshListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     public void setWhooshList(List<Whoosh> wl) {
         whooshList.clear();
         whooshList.addAll(wl);

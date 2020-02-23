@@ -2,7 +2,6 @@ package org.stormroboticsnj.ui.display;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +37,7 @@ public class DisplayFragment extends Fragment {
 
     private OnSearchListener mListener;
     private SharedViewModel svm;
+
     public DisplayFragment() {
         // Required empty public constructor
     }
@@ -62,12 +62,12 @@ public class DisplayFragment extends Fragment {
         final Spinner colSpinner = v.findViewById(R.id.spinnerCols);
         final EditText searchBox = v.findViewById(R.id.txtVal);
 
-       // final View testView = v.findViewById(R.id.frag1);
+        // final View testView = v.findViewById(R.id.frag1);
 
         final MainActivity act = (MainActivity) getActivity(); //this might throw exception if (getActivity() instanceOf MainActivity) is false
         final CharSequence[] colNames = {"team_num", "match_num"};
         final CharSequence[] displayNames = {"Team Number", "Match Number"};
-        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(),  R.layout.spinner_item, displayNames);
+        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.spinner_item, displayNames);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colSpinner.setAdapter(adapter);
 
@@ -91,10 +91,12 @@ public class DisplayFragment extends Fragment {
         if (mListener != null) {
             List<Whoosh> data = mListener.newSearch(t, v);
             WhooshListFragment frag = (WhooshListFragment) getChildFragmentManager().findFragmentById(R.id.frag1);
-            if (data.isEmpty()) Toast.makeText(getContext(), "No Matches Found", Toast.LENGTH_LONG).show();
+            if (data.isEmpty()) {
+                Toast.makeText(getContext(), "No Matches Found", Toast.LENGTH_LONG).show();
+            }
             frag.setWhooshList(data);
-          
-          //bad
+
+            //bad
 //            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
 //            svm.select(data);
 

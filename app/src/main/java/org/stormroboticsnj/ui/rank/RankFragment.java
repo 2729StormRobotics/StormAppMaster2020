@@ -104,7 +104,7 @@ public class RankFragment extends Fragment {
                 "Endgame Bottom PC",
                 "Rotation Control Frequency",
                 "Position Control Frequency",
-                };
+        };
         final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), R.layout.spinner_item, displayNames);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colSpinner.setAdapter(adapter);
@@ -123,7 +123,7 @@ public class RankFragment extends Fragment {
     public void onButtonPressed(RankEnum rank) {
         if (mListener != null) {
             List<Whoosh> data = mListener.getAll();
-            if (!(data.size() > 0)){
+            if (!(data.size() > 0)) {
                 Toast.makeText(getActivity(), "Databse is empty", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -224,9 +224,13 @@ public class RankFragment extends Fragment {
                             default:
                                 // nothing
                         }
-                        if (avt0 == avt1) return 0;
-                        else if (avt0 > avt1) return 1;
-                        else {return -1;}
+                        if (avt0 == avt1) {
+                            return 0;
+                        } else if (avt0 > avt1) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
                     }
                 });
 
