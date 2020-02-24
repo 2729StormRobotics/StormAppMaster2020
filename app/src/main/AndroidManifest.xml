@@ -12,7 +12,8 @@
         android:label="Storm Scouting Radar 2020: Master"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="androidx.multidex.MultiDexApplication">
         <activity android:name=".ScanActivity"></activity>
         <activity
             android:name=".MainActivity"
