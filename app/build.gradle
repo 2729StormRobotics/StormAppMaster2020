@@ -44,6 +44,8 @@ dependencies {
     def room_version = "2.2.4"
     def permissions_version = "4.6.0"
 
+    def multidex_version = "2.0.1"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
@@ -62,6 +64,9 @@ dependencies {
 
     // Java language implementation
     implementation "androidx.activity:activity:$activity_version"
+
+    // Multidex support for splitting app
+    implementation "androidx.multidex:multidex:$multidex_version"
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
