@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.stormroboticsnj.MainActivity;
@@ -83,6 +85,10 @@ public class DisplayFragment extends Fragment {
                 onButtonPressed(colSpinner.getSelectedItemPosition() == 0, filterVal);
             }
         });
+
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frag1, DisplayFragment.newInstance());
         return v;
     }
 
