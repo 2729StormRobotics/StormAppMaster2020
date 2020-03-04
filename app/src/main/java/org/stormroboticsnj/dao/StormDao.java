@@ -40,6 +40,4 @@ public interface StormDao {
     public List<Whoosh> getByMatchNumber(int matchNum);
 
 
-
-
 }

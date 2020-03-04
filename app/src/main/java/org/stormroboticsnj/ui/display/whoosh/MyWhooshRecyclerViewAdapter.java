@@ -50,7 +50,7 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
         holder.mItem = w;
         //set and format text for team number
         holder.mTeamView.setText(String.format(Locale.US, "Team %d", w.getTeam()));
-        holder.mTeamView.setTextColor(w.isAlliance() ? Color.rgb(255, 0, 0) : Color.rgb(0,0,255));
+        holder.mTeamView.setTextColor(w.isAlliance() ? Color.rgb(255, 0, 0) : Color.rgb(0, 0, 255));
 
         //set text for match number
         holder.mMatchView.setText(String.format(Locale.US, "Match %d", w.getMatch()));
@@ -77,13 +77,15 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
         holder.mETotView.setText(String.format(Locale.US, "%d", (w.getEPowerCell1() + w.getEPowerCell2() + w.getEPowerCell3()))); //end total
         holder.mTotView.setText(String.format(Locale.US, "%d",
                 (w.getAPowerCell1() + w.getAPowerCell2() + w.getAPowerCell3() +
-                 w.getTPowerCell1() + w.getTPowerCell2() + w.getTPowerCell3() +
-                 w.getEPowerCell1() + w.getEPowerCell2() + w.getEPowerCell3())
+                        w.getTPowerCell1() + w.getTPowerCell2() + w.getTPowerCell3() +
+                        w.getEPowerCell1() + w.getEPowerCell2() + w.getEPowerCell3())
         )); //end total
 
         //set text for auto pickup
         holder.mAPickView.setText(String.format(Locale.US, "%d", w.getAPowerCellPickup()));
-        if (w.getAPowerCellPickup() > 0) holder.mAPickView.setTypeface(null, Typeface.BOLD);
+        if (w.getAPowerCellPickup() > 0) {
+            holder.mAPickView.setTypeface(null, Typeface.BOLD);
+        }
 
         //set text formatting for control panel info
         if (w.isRotationControl()) {
@@ -102,7 +104,6 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
         }
 
 
-
         //set text formatting for hang info
         holder.mParkView.setTextColor(Color.parseColor("#888888"));
         holder.mParkView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.transcell));
@@ -114,16 +115,19 @@ public class MyWhooshRecyclerViewAdapter extends RecyclerView.Adapter<MyWhooshRe
             case "P":
                 holder.mParkView.setTextColor(Color.parseColor("#000000"));
                 holder.mParkView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mParkView.setText(String.format(Locale.US, "Park %ds", w.getClimbSecs()));
                 break;
             case "H":
                 holder.mHangView.setTextColor(Color.parseColor("#000000"));
                 holder.mHangView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mHangView.setText(String.format(Locale.US, "Hang %ds", w.getClimbSecs()));
                 break;
             case "L":
                 holder.mHangView.setTextColor(Color.parseColor("#000000"));
                 holder.mHangView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
                 holder.mLevelView.setTextColor(Color.parseColor("#000000"));
                 holder.mLevelView.setBackground(ContextCompat.getDrawable(holder.mView.getContext(), R.drawable.greencell));
+                holder.mHangView.setText(String.format(Locale.US, "Hang %ds", w.getClimbSecs()));
                 break;
             default:
                 //did not participate

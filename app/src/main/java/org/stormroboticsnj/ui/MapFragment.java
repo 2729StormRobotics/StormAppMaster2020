@@ -3,12 +3,12 @@ package org.stormroboticsnj.ui;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
 
 import org.stormroboticsnj.R;
 
@@ -74,10 +74,10 @@ public class MapFragment extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Objects.equals(view.getBackground().getConstantState(), getResources().getDrawable(R.drawable.field_map_blue).getConstantState())) {
-                    view.setBackground(getResources().getDrawable(R.drawable.field_map_red));
+                if (Objects.equals(view.getBackground().getConstantState(), ResourcesCompat.getDrawable(getResources(), R.drawable.field_map_blue, null).getConstantState())) {
+                    view.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.field_map_red, null));
                 } else {
-                    view.setBackground(getResources().getDrawable(R.drawable.field_map_blue));
+                    view.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.field_map_blue, null));
                 }
             }
         });

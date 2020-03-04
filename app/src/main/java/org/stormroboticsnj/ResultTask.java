@@ -31,9 +31,8 @@ public class ResultTask extends AsyncTask<String, Integer, Boolean> {
         String[] whooshSub;
 
         try {
-
-            for (int i = 0; i < whoosh.length; i++) {
-                whooshSub = whoosh[i].split(Pattern.quote(","));
+            for (String s : whoosh) {
+                whooshSub = s.split(Pattern.quote(","));
                 w = new Whoosh();
                 w.setTeam(Integer.parseInt(whooshSub[0]));
                 w.setMatch(Integer.parseInt(whooshSub[1]));
@@ -53,12 +52,13 @@ public class ResultTask extends AsyncTask<String, Integer, Boolean> {
                 w.setLocations(whooshSub[15]);
                 w.setEndgameOutcome(whooshSub[16]);
                 w.setDefenseSecs(Integer.parseInt(whooshSub[17]));
+                w.setClimbSecs(Integer.parseInt(whooshSub[18]));
                 stormDao.insertWhooshes(w);
             }
 
         } catch (Exception e) {
             Log.d("Failed", e.toString());
-
+            return false;
         }
         return true;
     }

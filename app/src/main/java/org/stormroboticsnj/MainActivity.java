@@ -1,19 +1,15 @@
 package org.stormroboticsnj;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.Menu;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -40,12 +36,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements DisplayFragment.OnSearchListener, WhooshListFragment.OnListFragmentInteractionListener,
         RankFragment.OnSearchListener, TeamListFragment.OnListFragmentInteractionListener, DatabaseTools.OnFragmentInteractionListener,
-        MapFragment.OnFragmentInteractionListener, ActivityCompat.OnRequestPermissionsResultCallback, PrivacyFragment.OnFragmentInteractionListener {
+        MapFragment.OnFragmentInteractionListener, PrivacyFragment.OnFragmentInteractionListener {
 
-    public static final int CAMERA_REQUEST_CODE = 1;
     public static final int DUMP_REQUEST_CODE = 2729;
     private AppBarConfiguration mAppBarConfiguration;
     private AppDatabase db;
@@ -72,17 +68,7 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
         /* get database, or build if it doesn't exist. This exact line must be included in the onCreate
         method of every Activity that uses the database. db can be a class-wide variable or local
         within onCreate. */
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "storm").allowMainThreadQueries().build(); //build database
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null && bundle.containsKey("CameraPermission")) {
-            Toast.makeText(getApplicationContext(), "No Camera Permission", Toast.LENGTH_SHORT);
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
-            }
-        }
-
+        db = AppDatabase.getDatabase(getApplicationContext());
     }
 
     public String[] getColNames() { // Get the column names of the data
@@ -119,8 +105,11 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public List<Whoosh> newSearch(boolean team, int val) {
         StormDao stormDao = db.stormDao();
-        if (team) return stormDao.getByTeamNumber(val);
-        else return stormDao.getByMatchNumber(val);
+        if (team) {
+            return stormDao.getByTeamNumber(val);
+        } else {
+            return stormDao.getByMatchNumber(val);
+        }
     }
 
     @Override
@@ -171,17 +160,16 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
                     OutputStreamWriter osr = new OutputStreamWriter(fileOutputStream);
                     CSVWriter csvWrite = new CSVWriter(osr);
                     //make a custom query instead of using Dao so that we can get a Cursor instead of a List<Whoosh>
-                    Cursor curCSV = db.query("SELECT * FROM " + "whooshes", null);
+                    StormDao stormDao = db.stormDao();
+                    List<Whoosh> allWhooshes = stormDao.getAllWhooshes();
 
-                    csvWrite.writeNext(curCSV.getColumnNames());
-                    while (curCSV.moveToNext()) { //loops through table, making sure to stay in bounds (moveToNext goes to next row)
-                        String[] arrStr = new String[curCSV.getColumnCount()];
-                        for (int i = 0; i < curCSV.getColumnCount() - 1; i++) //combine all columns into String[]
-                            arrStr[i] = curCSV.getString(i);
-                        csvWrite.writeNext(arrStr); //make the String[] a row in the csv file
+                    csvWrite.writeNext(Whoosh.getColumnNames());
+                    for (Whoosh w : allWhooshes) {
+                        String wString = w.toString();
+                        wString = wString.substring(0, wString.length() - 1);
+                        csvWrite.writeNext(wString.split(Pattern.quote(",")));
                     }
                     csvWrite.close(); //cleanup
-                    curCSV.close();
 
                     fileOutputStream.close();
                     pfd.close();
@@ -197,15 +185,5 @@ public class MainActivity extends AppCompatActivity implements DisplayFragment.O
     @Override
     public void onFragmentInteraction(Uri uri) {
         //mandatory implementation for MapFragment
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(getApplicationContext(), "Camera permission denied! Scanning will not work.", Toast.LENGTH_LONG).show();
-            }
-        }
     }
 }

@@ -57,6 +57,7 @@ public class TeamListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     public void setTeamList(List<Team> wl) {
         teamList.clear();
         teamList.addAll(wl);

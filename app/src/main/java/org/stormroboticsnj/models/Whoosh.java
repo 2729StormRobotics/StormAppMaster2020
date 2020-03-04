@@ -21,46 +21,83 @@ public class Whoosh {
     private int match; // Private integer variable for match number
     @ColumnInfo(name = "alliance") // Column for alliance color ("red" or "blue"
     private boolean alliance; // Private boolean variable for alliance color
-    @ColumnInfo(name ="bottom_port_auto") // Column for bottom port score auto
+    @ColumnInfo(name = "bottom_port_auto") // Column for bottom port score auto
     private int aPowerCell1; // Private integer variable for bottom port score auto
-    @ColumnInfo(name ="outer_port_auto") // Column for outer port score auto
+    @ColumnInfo(name = "outer_port_auto") // Column for outer port score auto
     private int aPowerCell2; // Private integer variable for outer port score
-    @ColumnInfo(name ="inner_port_auto") // Column for inner port score
+    @ColumnInfo(name = "inner_port_auto") // Column for inner port score
     private int aPowerCell3; // Private integer variable for inner port score
     @ColumnInfo(name = "power_cells_picked_up_auto") // Column for power cell pickup auto
     private int aPowerCellPickup; // Private integer variable for power cell pickup auto
-    @ColumnInfo(name ="bottom_port_teleop") // Column for bottom port score teleop
+    @ColumnInfo(name = "bottom_port_teleop") // Column for bottom port score teleop
     private int tPowerCell1; // Private integer variable for bottom port score teleop
-    @ColumnInfo(name ="outer_port_teleop") // Column for outer port score teleop
+    @ColumnInfo(name = "outer_port_teleop") // Column for outer port score teleop
     private int tPowerCell2; // Private integer variable for outer port score teleop
-    @ColumnInfo(name ="inner_port_teleop") // Column for inner port score teleop
+    @ColumnInfo(name = "inner_port_teleop") // Column for inner port score teleop
     private int tPowerCell3; // Private integer variable for inner port score teleop
-    @ColumnInfo(name ="rotation_control") // Column for rotation control panel
+    @ColumnInfo(name = "rotation_control") // Column for rotation control panel
     private boolean rotationControl; // Private integer variable for rotation control panel
-    @ColumnInfo(name ="position_control") // Column for position control panel
+    @ColumnInfo(name = "position_control") // Column for position control panel
     private boolean positionControl; // Private integer variable for position control panel
-    @ColumnInfo(name ="bottom_port_endgame") // Column for bottom port score endgame
+    @ColumnInfo(name = "bottom_port_endgame") // Column for bottom port score endgame
     private int ePowerCell1; // Private integer variable for bottom port score endgame
-    @ColumnInfo(name ="outer_port_endgame") // Column for outer port score endgame
+    @ColumnInfo(name = "outer_port_endgame") // Column for outer port score endgame
     private int ePowerCell2; // Private integer variable for outer port score endgame
-    @ColumnInfo(name ="inner_port_endgame") // Column for inner port score endgame
+    @ColumnInfo(name = "inner_port_endgame") // Column for inner port score endgame
     private int ePowerCell3; // Private integer variable for inner port score endgame
-    @ColumnInfo(name ="endgame_outcome") // Column for endgame outcome (park, hang, or hang level)
+    @ColumnInfo(name = "endgame_outcome") // Column for endgame outcome (park, hang, or hang level)
     private String endgameOutcome; // Private String variable for endgame outcome (park, hang, or hang level)
-    @ColumnInfo(name="locations") // Column for robot map scoring locations
+    @ColumnInfo(name = "locations") // Column for robot map scoring locations
     private String locations; // Private String variable for robot map scoring locations
-    @ColumnInfo(name="defenseSecs") // Column for robot total defense time
+    @ColumnInfo(name = "defenseSecs") // Column for robot total defense time
     private int defenseSecs; // Private integer variable for robot total defense time
+    @ColumnInfo(name="climbSecs")
+    private int climbSecs;
+    public int getClimbSecs() {
+        return climbSecs;
+    }
+
+    public void setClimbSecs(int climbSecs) {
+        this.climbSecs = climbSecs;
+    }
+
+
 
     /**
      * Whoosh class constructor
-     * @param t: team number
-     * @param m: match number
+     *
+     * @param t team number
+     * @param m match number
      */
     public Whoosh(int t, int m) {
         team = t;
         match = m;
     }
+
+    public static String[] getColumnNames() {
+        return new String[]{
+                "Team Number",
+                "Match Number",
+                "Alliance",
+                "Bottom Port Auto",
+                "Outer Port Auto",
+                "Inner Port Auto",
+                "PC Pickup Auto",
+                "Bottom Port Tele",
+                "Outer Port Tele",
+                "Inner Port Tele",
+                "Rotation Control",
+                "Position Control",
+                "Bottom Port Endgame",
+                "Outer Port Endgame",
+                "Inner Port Endgame",
+                "Scoring Locations",
+                "Endgame Outcome",
+                "Defense Second",
+                "Climb Seconds"
+        };
+    }
+
     //probably just for testing purposes
     public Whoosh(int team, int match, boolean alliance, int aPowerCell1, int aPowerCell2, int aPowerCell3, int aPowerCellPickup, int tPowerCell1,
                   int tPowerCell2, int tPowerCell3, boolean rotationControl, boolean positionControl, int ePowerCell1, int ePowerCell2,
@@ -150,20 +187,20 @@ public class Whoosh {
         return ePowerCell3;
     }
 
-    public String getEndgameOutcome(){ // Return: "H" for hang, "P" for park, "L" for level hang
+    public String getEndgameOutcome() { // Return: "H" for hang, "P" for park, "L" for level hang
         return endgameOutcome;
     }
 
     /**
      * Return:  "BS" for behind shield;
-     *          "FS" for front shield;
-     *          "BW" for behind wheel;
-     *          "FW" for front wheel;
-     *          "BL" for behind initiation line;
-     *          "FL" for front initiation line;
-     *          "SZ" for safe zone;
+     * "FS" for front shield;
+     * "BW" for behind wheel;
+     * "FW" for front wheel;
+     * "BL" for behind initiation line;
+     * "FL" for front initiation line;
+     * "SZ" for safe zone;
      */
-    public String getLocations(){
+    public String getLocations() {
         return locations;
     }
 
@@ -239,14 +276,14 @@ public class Whoosh {
 
     /**
      * Modify robot shooting locations
-     * @param locations
-     * "BS" for behind shield;
-     * "FS" for front shield;
-     * "BW" for behind wheel;
-     * "FW" for front wheel;
-     * "BL" for behind initiation line;
-     * "FL" for front initiation line;
-     * "SZ" for safe zone;
+     *
+     * @param locations "BS" for behind shield;
+     *                  "FS" for front shield;
+     *                  "BW" for behind wheel;
+     *                  "FW" for front wheel;
+     *                  "BL" for behind initiation line;
+     *                  "FL" for front initiation line;
+     *                  "SZ" for safe zone;
      */
     public void setLocations(String locations) {
         this.locations = locations;
@@ -257,34 +294,35 @@ public class Whoosh {
 
     }
 
-   // public void setEPowerCell1(int ePowerCell1) { this.ePowerCell1 = ePowerCell1; }
+    // public void setEPowerCell1(int ePowerCell1) { this.ePowerCell1 = ePowerCell1; }
 
-   // public void setEPowerCell2(int ePowerCell2) { this.ePowerCell2 = ePowerCell2; }
+    // public void setEPowerCell2(int ePowerCell2) { this.ePowerCell2 = ePowerCell2; }
 
-   // public void setEPowerCell3(int ePowerCell3) { this.ePowerCell3 = ePowerCell3; }
-
+    // public void setEPowerCell3(int ePowerCell3) { this.ePowerCell3 = ePowerCell3; }
 
 
     @NonNull
     @Override
     public String toString() {
-        return team
-                + "," + match
-                + "," + (alliance ? "r" : "b")
-                + "," + aPowerCell1
-                + "," + aPowerCell2
-                + "," + aPowerCell3
-                + "," + aPowerCellPickup
-                + "," + tPowerCell1
-                + "," + tPowerCell2
-                + "," + tPowerCell3
-                + "," + (rotationControl ? "y" : "n")
-                + "," + (positionControl ? "y" : "n")
-                + "," + ePowerCell1
-                + "," + ePowerCell2
-                + "," + ePowerCell3
-                + "," + locations
-                + "," + endgameOutcome
+        return          team //0
+                + "," + match //1
+                + "," + (alliance ? "r" : "b") //2
+                + "," + aPowerCell1 //3
+                + "," + aPowerCell2 //4
+                + "," + aPowerCell3 //5
+                + "," + aPowerCellPickup //6
+                + "," + tPowerCell1 //7
+                + "," + tPowerCell2 //8
+                + "," + tPowerCell3 //9
+                + "," + (rotationControl ? "y" : "n") //10
+                + "," + (positionControl ? "y" : "n") //11
+                + "," + ePowerCell1 //12
+                + "," + ePowerCell2 //13
+                + "," + ePowerCell3 //14
+                + "," + locations //15
+                + "," + endgameOutcome //16
+                + "," + defenseSecs //17
+                + "," + climbSecs //18
                 + "|";
     }
 }
