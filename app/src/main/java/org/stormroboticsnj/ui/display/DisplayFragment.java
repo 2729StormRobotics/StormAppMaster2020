@@ -32,10 +32,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class DisplayFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-    // TODO: Rename and change types of parameters
 
     private OnSearchListener mListener;
     private SharedViewModel svm;
@@ -101,10 +97,6 @@ public class DisplayFragment extends Fragment {
                 Toast.makeText(getContext(), "No Matches Found", Toast.LENGTH_LONG).show();
             }
             frag.setWhooshList(data);
-
-            //bad
-//            svm = ViewModelProviders.of(this).get(SharedViewModel.class);
-//            svm.select(data);
 
             svm = new ViewModelProvider(this).get(SharedViewModel.class);
             svm.select(data);
