@@ -55,7 +55,7 @@ dependencies {
     def arch_version = "2.1.0"
     def fragment_version = "1.2.3"
     def room_version = "2.2.5"
-    def permissions_version = "4.7.0"
+    def permissions_version = "4.8.0"
     def multidex_version = "2.0.1"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
